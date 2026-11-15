@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="az"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kosmik Kəşf</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='16' fill='%237a6cff'/%3E%3Cellipse cx='32' cy='34' rx='29' ry='8' fill='none' stroke='%23ffd84d' stroke-width='4' transform='rotate(-20 32 34)'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#0a0f2e;--bg2:#2a1466;--ink:#f4f1ff;--mute:#aab0e6;--moon:#ffd84d;--mint:#3ef2b0;--pink:#ff5fa2;--sky:#4cc9ff;--orange:#ff9f45;--card:#171c4d;--bad:#ff5d6c;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+/* Ay bazası üslubunda kosmik sürüşdürmə zolağı */
+*{scrollbar-width:thin;scrollbar-color:#ffd84d #151b4b}
+*::-webkit-scrollbar{width:12px;height:12px}
+*::-webkit-scrollbar-track{background:linear-gradient(180deg,#10163f,#25265f);border:1px solid #424b91;border-radius:20px}
+*::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#fff0a3,#ffd84d 48%,#a88aff);border:2px solid #25265f;border-radius:20px;box-shadow:inset 0 0 5px #fff8}
+*::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#fff7c8,#4cc9ff)}
+.history-list{display:grid;gap:9px;margin-top:12px}
+.history-item{padding:12px;border:1px solid #454d91;border-left:4px solid var(--bad);border-radius:12px;background:#10163e;color:#dce8ff;line-height:1.4}
+.history-item.good{border-left-color:var(--mint)}
+.history-item b{color:var(--moon)}
+.history-item small{display:block;color:var(--mute);margin-top:5px}
+.explain{padding:12px 14px;margin-top:10px;border:1px solid #3ef2b0;border-radius:14px;background:#0d3a36;color:#e4fff5;line-height:1.45}
+
+[hidden]{display:none!important}
+body{margin:0;min-height:100vh;font-family:"Fredoka","Trebuchet MS",system-ui,sans-serif;color:var(--ink);background:radial-gradient(ellipse at 50% -10%,var(--bg2),var(--bg) 62%) var(--bg) fixed}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.75;background-size:340px 200px;background-image:radial-gradient(2px 2px at 20px 30px,#fff,transparent),radial-gradient(2px 2px at 90px 120px,#ffd84d,transparent),radial-gradient(1.5px 1.5px at 160px 60px,#fff,transparent),radial-gradient(1.5px 1.5px at 230px 170px,#9fe8ff,transparent),radial-gradient(2px 2px at 300px 90px,#fff,transparent)}
+body::after{content:"";position:fixed;left:-10%;right:-10%;bottom:-130px;height:210px;z-index:0;pointer-events:none;border-radius:50% 50% 0 0;background:radial-gradient(circle at 18% 32%,#9a98b8 0 14px,transparent 15px),radial-gradient(circle at 58% 48%,#9a98b8 0 24px,transparent 25px),var(--gr,#c9c6e0)}
+button{font:inherit;color:inherit;cursor:pointer}button:disabled{cursor:default}
+:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.wrap{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:18px 16px 150px}
+.top{display:flex;align-items:center;gap:14px}
+.moon{font-size:54px;line-height:1;animation:bob 4s ease-in-out infinite;filter:drop-shadow(0 0 18px rgba(255,216,77,.5))}
+@keyframes bob{50%{transform:translateY(-8px) rotate(-6deg)}}
+h1{margin:0;font-size:clamp(30px,8vw,46px);line-height:1;color:var(--moon);text-shadow:0 0 24px rgba(255,216,77,.45)}
+.sub{margin:4px 0 0;color:var(--mute);font-size:16px}
+.chip{background:var(--card);border:2px solid var(--moon);border-radius:999px;padding:6px 14px;font-weight:600;white-space:nowrap}
+.top .chip{margin-left:auto;font-size:14px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 10px}.bar .chip{border-color:#3a3f8f}.map-extra{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 2px}.energy{height:10px;min-width:110px;flex:1;max-width:190px;border-radius:99px;background:#292e70;overflow:hidden;border:1px solid #5960a8}.energy i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#3ef2b0,#ffd84d);transition:width .15s}.mini{color:var(--mute);font-size:14px}
+#cv{display:block;width:100%;height:auto;aspect-ratio:760/440;border-radius:22px;border:3px solid #3a3f8f;touch-action:none}
+.hint{color:var(--mute);font-size:15px;line-height:1.4;margin:10px 2px}
+.big{display:block;margin:10px auto 0;background:var(--moon);color:#2a1466;border:0;border-radius:999px;padding:13px 28px;font-size:19px;font-weight:700;box-shadow:0 5px 0 #c9a21a}
+.big:active:not(:disabled){transform:translateY(3px);box-shadow:0 2px 0 #c9a21a}.big:disabled{background:#4a4d86;color:#c9ccff;box-shadow:0 5px 0 #33366b}
+.ghost{background:transparent;border:2px solid var(--mute);border-radius:999px;padding:8px 14px;font-size:16px;font-weight:600}
+.ghost:disabled{opacity:.4}
+.dpad{display:grid;grid-template-columns:repeat(3,58px);grid-template-rows:repeat(2,58px);gap:6px;justify-content:center;margin:12px 0}
+.dpad button{border-radius:14px;border:3px solid #3a3f8f;background:var(--card);font-size:22px;font-weight:700;touch-action:none}
+@media (hover:hover) and (pointer:fine){.dpad{display:none}}
+.shop{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+.info{background:var(--card);border-radius:18px;padding:12px 16px;margin:12px 0;color:var(--mute);font-size:16px;line-height:1.45}
+details{background:var(--card);border-radius:18px;padding:10px 14px;margin-top:12px}summary{cursor:pointer;font-weight:600}
+#al div{padding:5px 0;opacity:.4}#al div.on{opacity:1}#al small{color:var(--mute)}
+#reset{display:block;margin:18px auto 0}
+.hud{display:flex;justify-content:space-between;align-items:center;margin:14px 0 8px}
+.hearts{font-size:22px;letter-spacing:2px}
+.dayname{font-size:21px;font-weight:700;margin:6px 0 10px}
+.track{--p:0;position:relative;height:110px;border-radius:22px;margin:6px 0 10px;overflow:hidden;background:linear-gradient(#1b1f66,#2f2a7a 70%,var(--gr,#c9c6e0) 70%)}
+.track.hit{animation:shake .4s}
+.flag{position:absolute;right:10px;bottom:22%;font-size:40px}
+.astro{position:absolute;bottom:22%;left:calc(8px + var(--p)*(100% - 120px));font-size:40px;transition:left .5s}
+.mt{position:absolute;top:-40px;left:calc(8px + var(--p)*(100% - 120px));font-size:40px;animation:drop .6s ease-in forwards}
+@keyframes drop{to{top:45%}}
+.slots{display:grid;grid-template-columns:repeat(20,1fr);gap:3px;margin-bottom:10px}
+.slots i{height:16px;border-radius:4px;background:#262b6b}.slots i.g{background:var(--mint)}.slots i.x{background:var(--bad)}.slots i.l{background:var(--moon)}
+.meta{display:flex;justify-content:space-between;color:var(--mute);font-size:15px;margin-bottom:6px}
+.card{background:#10153f;border:3px solid #2e3585;border-radius:26px;padding:18px 16px}
+.card h2{margin:0 0 12px;font-size:clamp(20px,5vw,26px);line-height:1.25}
+.ans{--c:var(--pink);display:flex;align-items:center;gap:12px;width:100%;margin:11px 0;padding:12px 16px;text-align:left;font-size:18px;font-weight:600;line-height:1.25;background:var(--card);border:3px solid var(--c);border-radius:18px;box-shadow:0 5px 0 var(--c);transition:transform .1s}
+.ans.c1{--c:var(--sky)}.ans.c2{--c:var(--orange)}.ans.c3{--c:#9d86ff}
+.ans:not(:disabled):hover{transform:translateY(-2px)}.ans:not(:disabled):active{transform:translateY(3px);box-shadow:0 2px 0 var(--c)}
+.ans .l{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--c);color:#1a1038;font-weight:700}
+.ans.ok{background:#0f4a3a;--c:var(--mint)}.ans.bad{background:#4d1730;--c:var(--bad);animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.tools{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.fb{min-height:34px;margin:12px 4px 6px;font-size:19px;font-weight:600}
+.res{text-align:center;padding:26px 16px}.res .em{font-size:80px;line-height:1.1}
+.res h2{margin:8px 0;font-size:clamp(24px,6vw,32px)}.res p{margin:6px 0 14px;color:var(--mute);font-size:18px}
+#rStars{font-size:44px;color:var(--moon);letter-spacing:6px}.res .ghost{display:block;margin:14px auto 0}
+#toast{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:#10153f;border:2px solid var(--moon);border-radius:999px;padding:10px 18px;z-index:9;font-weight:600;max-width:92vw;text-align:center}
+.conf{position:fixed;inset:0;z-index:5;pointer-events:none;overflow:hidden}
+.conf i{position:absolute;top:-20px;width:10px;height:14px;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media (prefers-reduced-motion:reduce){.moon,.conf{animation:none;display:none}.track.hit,.ans.bad{animation:none}}
+
+.hero{margin:28px 0 18px;padding:26px 20px;text-align:center;border:1px solid #5960a8;border-radius:26px;background:radial-gradient(circle at 50% 0%,#343b88,#141a48 68%);box-shadow:0 16px 45px #05091f88}.hero-art{font-size:76px;filter:drop-shadow(0 0 20px #4cc9ff88);animation:bob 3.5s ease-in-out infinite}.hero-kicker{margin-top:8px;color:#4cc9ff;font-size:12px;font-weight:700;letter-spacing:3px}.hero h2{font-size:clamp(30px,8vw,44px);color:#ffd84d;margin:8px 0}.hero p{max-width:520px;margin:0 auto 18px;color:#dce8ff;font-size:17px;line-height:1.5}.hero-note{color:#aab0e6;font-size:13px;margin-top:18px}.guide{color:#c8cbed;line-height:1.5}.guide p{margin:10px 0}.world-door{filter:drop-shadow(0 0 15px #ffd84d)}.storybox{display:flex;flex-direction:column;gap:5px;padding:12px 15px;margin:10px 0;border:1px solid #5960a8;border-radius:15px;background:linear-gradient(110deg,#20275e,#18234b);color:#dce8ff}.storybox b{color:#ffd84d}.crate-label{font-size:11px;letter-spacing:1.5px;color:#ffd84d;font-weight:700;margin-bottom:8px}.doorbox{margin:12px 0;padding:18px;border:1px solid #ffd84d;border-radius:18px;background:radial-gradient(circle at 50% 0%,#50401c,#171c4d 70%);text-align:center}.door-icon{font-size:42px;margin:3px}.doorbox b{color:#ffd84d;letter-spacing:1px}.doorbox p{color:#dce8ff}.doorbox .big{width:auto;margin:0}.doorbox .mini{margin-top:8px;color:#ffb8c2}
+.langbar{position:relative;z-index:2;display:flex;gap:8px;justify-content:flex-end;margin-bottom:10px}
+.langbtn{display:flex;align-items:center;gap:6px;border:2px solid #3a3f8f;background:var(--card);border-radius:999px;padding:5px 12px 5px 7px;font-weight:700;font-size:14px;color:var(--ink)}
+.langbtn svg{width:24px;height:16px;border-radius:3px;box-shadow:0 0 0 1px #fff3}
+.langbtn.on{border-color:var(--moon);background:#2a2f78;box-shadow:0 0 12px rgba(255,216,77,.35)}
+.ans .tx{flex:1}
+.dpad button{font-size:14px}
+.maps{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px}.mp{flex:none;border:2px solid #3a3f8f;background:var(--card);border-radius:999px;padding:7px 14px;font-weight:600;font-size:15px;color:var(--ink)}.mp.on{border-color:var(--moon);background:#2a2f78;box-shadow:0 0 12px rgba(255,216,77,.35)}
+
+.logo svg{width:58px;height:58px;display:block}
+.flash{min-height:190px;cursor:pointer;display:flex;flex-direction:column;justify-content:center;text-align:center;transition:background .2s,border-color .2s}
+.flash h2{font-size:clamp(22px,6vw,30px)}
+.flash.back{background:#0f4a3a;border-color:var(--mint)}
+.flash .mini{margin-top:10px}
+.ownform{display:grid;gap:8px;margin-top:10px}
+.ownform input,.aiform input{font:inherit;padding:11px 14px;border-radius:14px;border:2px solid #3a3f8f;background:#10163e;color:var(--ink);min-width:0}
+.ownform .big{margin:4px 0 0}
+.aichat{display:flex;flex-direction:column;gap:10px;max-height:52vh;min-height:220px;overflow-y:auto;padding:12px;border:2px solid #3a3f8f;border-radius:20px;background:#0d1238}
+.msg-ai,.msg-me{max-width:88%;padding:10px 14px;border-radius:16px;line-height:1.45;font-size:16px;overflow-wrap:anywhere}
+.msg-ai{align-self:flex-start;background:#1d2465;border:1px solid #4d57b3}
+.msg-me{align-self:flex-end;background:#ffd84d;color:#2a1466;font-weight:600}
+.msg-ai b{color:var(--moon)}.msg-ai a{color:var(--sky)}
+.msg-ai.typing{opacity:.7}
+.msg-ai .opt{display:block;width:100%;margin-top:8px;text-align:left;padding:9px 12px;border-radius:12px;border:2px solid #6a73d0;background:#10163e;font-weight:600}
+.msg-ai .opt.ok{background:#0f4a3a;border-color:var(--mint)}.msg-ai .opt.bad{background:#4d1730;border-color:var(--bad)}
+.aichips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.aiform{display:flex;gap:8px;align-items:center}.aiform input{flex:1;border-radius:999px}
+.aiform .big{margin:0;padding:11px 20px;font-size:17px}
+.catalog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.catalog-card{background:#10153f;border:2px solid #3a3f8f;border-radius:18px;padding:14px}
+.catalog-card h3{color:var(--moon);margin:0 0 8px;font-size:19px}
+.catalog-card p{color:#dce8ff;line-height:1.45;margin:8px 0}
+.catalog-card a{display:inline-block;color:var(--sky);margin:5px 10px 0 0;font-weight:600}
+.catalog-emoji{font-size:34px}
+#aiIn{font-size:16px;min-height:46px}
+#aiForm button:disabled{opacity:.6}
+.ai-reminder{border-color:var(--orange)!important;background:#3b2a18!important}
+
+</style></head><body>
+<div id="toast" hidden></div>
+<div class="wrap">
+<div class="langbar" id="langbar"></div>
+<header class="top"><div class="moon logo" aria-hidden="true"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kosmik Kəşf"><defs><linearGradient id="kkp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7be3ff"/><stop offset="1" stop-color="#8a5cff"/></linearGradient></defs><g transform="rotate(-20 32 34)"><ellipse cx="32" cy="34" rx="29" ry="9" fill="none" stroke="#ffd84d" stroke-width="3" opacity=".6"/></g><circle cx="32" cy="32" r="16" fill="url(#kkp)"/><circle cx="26" cy="27" r="3" fill="#fff" opacity=".28"/><circle cx="38" cy="37" r="4" fill="#fff" opacity=".2"/><g transform="rotate(-20 32 34)"><path d="M3 34A29 9 0 0 0 61 34" fill="none" stroke="#ffd84d" stroke-width="3"/></g><path d="M54 5l2 5.5 5.5 2-5.5 2-2 5.5-2-5.5-5.5-2 5.5-2z" fill="#fff6b0"/></svg></div><div><h1 data-t="title"></h1><p class="sub" data-t="sub"></p></div><div class="chip" id="stars"></div></header>
+<section id="titleScreen">
+ <div class="hero"><div class="hero-art">👩‍🚀</div><div class="hero-kicker" data-t="kicker"></div><h2 data-t="h2"></h2><p data-t="herop"></p>
+ <button class="big" id="playGame" data-t="play"></button><div class="shop"><button class="ghost" id="heroLearn" data-t="playNASA"></button><button class="ghost" id="heroAI" data-t="aiBtn"></button></div><div class="hero-note" data-t="heronote"></div></div>
+ <details><summary data-t="guideT"></summary><div class="guide" data-h="guide"></div></details>
+</section>
+<section id="map">
+<div class="bar"><span class="chip" id="cn"></span><span class="chip" id="lp"></span><span class="chip" id="ff"></span><span class="chip" id="pcn"></span></div>
+<div class="maps" id="mapbar"></div>
+<canvas id="cv" width="760" height="440"></canvas>
+<div class="map-extra"><span class="mini" id="missionProgress"></span><div class="energy" hidden><i id="energyFill"></i></div></div><p class="hint" id="worldHint" data-t="hint"></p>
+<button class="big" id="near" hidden></button>
+<div class="dpad"><span></span><button data-k="w">PgUp</button><span></span><button data-k="a">Home</button><button data-k="s">PgDn</button><button data-k="d">End</button></div>
+<div class="shop"><button class="ghost" id="scanBtn" data-t="scan"></button></div>
+<div class="shop"><button class="ghost" id="buyL"></button><button class="ghost" id="buyF"></button></div>
+<p class="info" data-h="info"></p><p class="info" data-h="mapInfo"></p>
+<details><summary data-t="nasaSum"></summary><div class="guide" data-h="nasaHist"></div></details>
+<div class="shop"><button class="big" id="playNASA" data-t="playNASA"></button><button class="big" id="openAI" data-t="aiBtn"></button><button class="ghost" id="openCatalog">🛰️ NASA Kataloqu</button></div>
+<details><summary data-t="histSum"></summary><p class="mini" data-t="histDesc"></p><div id="historyList" class="history-list"></div>
+<div class="tools"><button class="big" id="repeatMistakes" data-t="repeat"></button><button class="ghost" id="clearHistory" data-t="clear"></button></div></details>
+<details><summary><span data-t="ach"></span> <span id="ac"></span></summary><div id="al"></div></details>
+<button class="ghost" id="reset" data-t="rst"></button>
+</section>
+<section id="quiz" hidden>
+<div class="hud"><button class="ghost" id="back" data-t="back"></button><div class="hearts" id="hearts"></div></div>
+<div class="dayname" id="head"></div><div class="storybox" id="storybox"><b data-t="box"></b><span id="storyText"></span></div>
+<div class="track" id="track"><span class="astro" id="astro">&#x1F469;&#x200D;&#x1F680;</span><span class="mt" id="mt" hidden>☄️</span><span class="flag">🏠</span></div>
+<div class="slots" id="slots"></div>
+<div class="meta"><span id="mq"></span><span id="mr"></span></div>
+<div class="meta"><span id="mL"></span><span id="mF"></span></div>
+<div class="card"><div class="crate-label" data-t="crate"></div><h2 id="q"></h2><div id="opts"></div></div>
+<div class="doorbox" id="doorbox" hidden><div class="door-icon">🚪✨</div><b data-t="door"></b><p id="doorHint"></p><div class="mini" data-t="doorFb"></div></div>
+<div class="tools"><button class="ghost" id="bL"></button><button class="ghost" id="bF"></button></div>
+<div class="fb" id="msg" aria-live="polite"></div>
+<button class="big" id="go" hidden></button>
+</section>
+<section id="result" hidden>
+<div class="card res"><div class="em" id="rEmoji"></div><h2 id="rTitle"></h2><div id="rStars"></div><p id="rText"></p>
+<button class="big" id="rNext"></button><button class="ghost" id="rMap"></button></div>
+</section>
+<section id="cards" hidden>
+<div class="hud"><button class="ghost" id="cBack" data-t="backB"></button><div class="chip" id="cProg"></div></div>
+<div class="dayname" data-t="cardTitle"></div>
+<p class="info" data-t="cardDesc"></p>
+<div class="tools"><button class="ghost" id="cShuf"></button><button class="ghost" id="cOnly"></button></div>
+<div class="meta"><span id="cNum"></span><span id="cKnownMark"></span></div>
+<div class="card flash" id="flash"><div class="crate-label" id="cLabel"></div><h2 id="cText"></h2><div class="mini" id="cHint"></div></div>
+<div class="tools"><button class="ghost" id="cPrev" data-t="prev"></button><button class="big" id="cFlip"></button><button class="ghost" id="cNext" data-t="nxt"></button></div>
+<div class="tools"><button class="ghost" id="cKnow" data-t="knownB"></button><button class="ghost" id="cUnk" data-t="unknownB"></button></div>
+<div class="tools"><button class="ghost" id="cDel" data-t="delC" hidden></button></div>
+<details><summary data-t="own"></summary><div class="ownform"><input id="ownQ" data-p="ownQ" maxlength="200"><input id="ownA" data-p="ownA" maxlength="300"><button class="big" id="cAdd" data-t="addC"></button></div></details>
+</section>
+<section id="catalog" hidden>
+ <div class="hud"><button class="ghost" id="catalogBack">← Geri</button><div class="chip">NASA Kəşfiyyat Arxivi</div></div>
+ <div class="dayname">🛰️ Kosmik texnologiyalar kataloqu</div>
+ <p class="info">Robotları, raketləri, kosmik gəmiləri, skafandrları və kosmik stansiyaları araşdır. Kartı seçərək geniş məlumat və NASA-nın şəkil, 3D model və video arxivlərinə keçid əldə et.</p>
+ <div class="maps" id="catalogCats"></div>
+ <div id="catalogGrid" class="catalog-grid"></div>
+ <p class="mini">Məlumat və media keçidləri NASA-nın rəsmi saytlarına yönləndirir. Bəzi obyektlər üçün 3D model və video mövcud olmaya bilər.</p>
+</section>
+<section id="ai" hidden>
+<div class="hud"><button class="ghost" id="aBack" data-t="backB"></button><div class="chip" data-t="aiBadge"></div></div>
+<div class="dayname" data-t="aiTitle"></div>
+<p class="info" data-t="aiNote"></p>
+<div class="aichat" id="aiLog" aria-live="polite"></div>
+<div class="aichips" id="aiChips"></div>
+<form class="aiform" id="aiForm"><input id="aiIn" autocomplete="off" data-p="aiPh"><button class="big" id="aiSendBtn" type="submit" data-t="aiSend"></button></form>
+</section>
+</div>
+<script>
+const T={
+title:["Kosmik Kəşf","Космическое открытие","Cosmic Discovery"],
+sub:["Kosmik missiya oyunu · NASA ilə kəşfiyyat","Космическая игра · исследуем вместе с NASA","Space mission game · explore with NASA"],
+kicker:["KOSMİK KƏŞF · KOSMİK MACƏRA","КОСМИЧЕСКОЕ ОТКРЫТИЕ · КОСМИЧЕСКОЕ ПРИКЛЮЧЕНИЕ","COSMIC DISCOVERY · SPACE ADVENTURE"],
+h2:["Son siqnalı tap!","Найди последний сигнал!","Find the last signal!"],
+herop:["Ay bazasının rabitəsi kəsilib. Kəşfiyyatçı kimi açıq ərazini araşdır, hava kilidlərini aç və bazanı xilas et.","Связь с лунной базой потеряна. Исследуй местность как разведчик, открывай шлюзы и спаси базу.","Contact with the Moon base is lost. Explore the open terrain as a scout, open the airlocks and save the base."],
+play:["🚀 LEVEL 1 — Oyuna başla","🚀 УРОВЕНЬ 1 — Начать игру","🚀 LEVEL 1 — Start the game"],
+heronote:["Qapılar sualları həll etdikcə avtomatik açılır. NASA tarixini öyrən, səhvlərini tarixçədə təkrar et.","Шлюзы открываются сами, когда ты решаешь вопросы. Изучай историю NASA и повторяй ошибки в журнале.","Airlocks open automatically as you solve questions. Learn NASA history and replay your mistakes from the log."],
+guideT:["📖 Oyun qaydaları və bələdçi","📖 Правила игры и руководство","📖 Game rules and guide"],
+guide:["<p><b>Hərəkət:</b> Page Up (yuxarı), Page Down (aşağı), Home (sola), End (sağa) və ya ox düymələri. Telefonda ekrandakı düymələrdən istifadə et.</p><p><b>Qapılar:</b> Düzgün cavabdan sonra hava kilidi avtomatik açılır. Səhv cavabda düzgün variant və izah göstərilir.</p><p><b>Suallar:</b> Hər sualın 4 variantı var; suallar və cavablar hər oyunda təsadüfi sıralanır. Hər missiyada 10 sual çıxır, keçmək üçün 7 düz cavab lazımdır.</p><p><b>Ürəklər:</b> 3 ürəyin var, hər səhv 1 ürək aparır.</p><p><b>Lampa:</b> Sualı keçir və lazım olan düz cavab sayını 1 azaldır. Eyni missiyada ikinci lampa əlavə 1 ürək aparır.</p><p><b>50/50:</b> İki yanlış variantı silir.</p><p><b>Seriyalar:</b> 3 ardıcıl düz = +1 50/50, 5 ardıcıl düz = +1 lampa.</p><p><b>Dil:</b> Yuxarı sağdakı AZ / RU / EN düymələri ilə dili istənilən vaxt dəyişə bilərsən.</p>",
+"<p><b>Движение:</b> Page Up (вверх), Page Down (вниз), Home (влево), End (вправо) или стрелки. На телефоне — кнопки на экране.</p><p><b>Шлюзы:</b> после верного ответа шлюз открывается сам. При ошибке показываются верный вариант и объяснение.</p><p><b>Вопросы:</b> у каждого вопроса 4 варианта; вопросы и ответы каждый раз идут в случайном порядке. В миссии 10 вопросов, для прохождения нужно 7 верных.</p><p><b>Сердца:</b> у тебя 3 сердца, каждая ошибка забирает 1.</p><p><b>Лампа:</b> пропускает вопрос и уменьшает нужное число верных ответов на 1. Вторая лампа в одной миссии забирает ещё 1 сердце.</p><p><b>50/50:</b> убирает два неверных варианта.</p><p><b>Серии:</b> 3 верных подряд = +1 к 50/50, 5 подряд = +1 лампа.</p><p><b>Язык:</b> кнопки AZ / RU / EN вверху справа переключают язык в любой момент.</p>",
+"<p><b>Move:</b> Page Up (up), Page Down (down), Home (left), End (right) or arrow keys. On a phone use the on-screen buttons.</p><p><b>Doors:</b> a correct answer opens the airlock automatically. A wrong answer shows the right option and an explanation.</p><p><b>Questions:</b> every question has 4 options; questions and answers come in a random order each game. A mission has 10 questions and you need 7 correct to pass.</p><p><b>Hearts:</b> you have 3 hearts, each mistake costs 1.</p><p><b>Lamp:</b> skips a question and lowers the required correct answers by 1. A second lamp in one mission costs an extra heart.</p><p><b>50/50:</b> removes two wrong options.</p><p><b>Streaks:</b> 3 correct in a row = +1 50/50, 5 in a row = +1 lamp.</p><p><b>Language:</b> use the AZ / RU / EN buttons at the top right any time.</p>"],
+hint:["Açıq ərazini araşdır: Page Up (yuxarı), Page Down (aşağı), Home (sola), End (sağa) və ya oxlarla hərəkət et. Missiya nöqtəsinə yaxınlaş və E bas.","Исследуй местность: Page Up (вверх), Page Down (вниз), Home (влево), End (вправо) или стрелки. Подойди к точке миссии и нажми E.","Explore the terrain: Page Up (up), Page Down (down), Home (left), End (right) or arrows. Get close to the mission point and press E."],
+sprintLbl:["⚡ Sprint","⚡ Спринт","⚡ Sprint"],
+scan:["📡 Skaner — gizli hədiyyələri göstər","📡 Сканер — показать тайники","📡 Scanner — reveal hidden gifts"],
+sprint:["⚡ Sprint","⚡ Спринт","⚡ Sprint"],
+buyL:["💡 Lampa al: 8 💎","💡 Купить лампу: 8 💎","💡 Buy lamp: 8 💎"],
+buyF:["🛡️ 50/50 al: 5 💎","🛡️ Купить 50/50: 5 💎","🛡️ Buy 50/50: 5 💎"],
+info:["❤️ 3 ürəklə başlayırsan, hər səhv 1 ürək aparır. 🎯 Hər missiyada <b>10 sual</b> var, keçmək üçün <b>7 düz</b> cavab lazımdır. 3 ardıcıl düz = 🛡️ +1 50/50, 5 ardıcıl düz = 💡 +1 lampa. 💎 Kristalları topla və gücləndirici al. Page Up/Down, Home, End/oxlar — hərəkət, E / Enter — missiyaya gir.","❤️ Ты начинаешь с 3 сердцами, каждая ошибка забирает 1. 🎯 В каждой миссии <b>10 вопросов</b>, нужно <b>7 верных</b>. 3 верных подряд = 🛡️ +1 50/50, 5 подряд = 💡 +1 лампа. 💎 Собирай кристаллы и покупай усиления. Page Up/Down, Home, End/стрелки — движение, E / Enter — войти в миссию.","❤️ You start with 3 hearts, each mistake costs 1. 🎯 Every mission has <b>10 questions</b> and you need <b>7 correct</b>. 3 correct in a row = 🛡️ +1 50/50, 5 in a row = 💡 +1 lamp. 💎 Collect crystals and buy boosts. Page Up/Down, Home, End/arrows — move, E / Enter — enter the mission."],
+nasaSum:["🛰️ NASA-nın qısa tarixçəsi","🛰️ Краткая история NASA","🛰️ A short history of NASA"],
+nasaHist:["<p><b>1958 — NASA yaradıldı.</b> ABŞ-ın mülki kosmik agentliyi işə başladı.</p><p><b>1961 — İlk insan kosmosda.</b> Yuri Qaqarin uçdu; Alan Şepard ABŞ-ın ilk insanlı uçuşunu etdi.</p><p><b>1969 — Apollo 11.</b> Armstronq və Oldrin Aya endi, Kollins orbitdə qaldı.</p><p><b>1972 — Apollo 17.</b> Son insanlı Ay enişi.</p><p><b>1977 — Voyager.</b> Voyager zondları uzaq planetlərə göndərildi.</p><p><b>1981 — Space Shuttle.</b> Təkrar istifadə olunan gəmi dövrü başladı.</p><p><b>1990 — Hubble.</b> Kosmik teleskop orbitə çıxdı.</p><p><b>1998 — ISS.</b> Beynəlxalq Kosmik Stansiyanın ilk modulları.</p><p><b>2012 — Curiosity.</b> Rover Marsa endi.</p><p><b>2021 — James Webb.</b> İnfraqırmızı teleskop kosmosa getdi.</p><p><b>2020-ci illər — Artemis.</b> İnsanların Aya qayıdışına hazırlıq.</p><p><a target='_blank' rel='noopener' href='https://www.nasa.gov/history/explore-nasas-history/'>NASA tarix arxivi ↗</a></p>",
+"<p><b>1958 — создано NASA.</b> Гражданское космическое агентство США начало работу.</p><p><b>1961 — первый человек в космосе.</b> Полёт Юрия Гагарина; Алан Шепард совершил первый пилотируемый полёт США.</p><p><b>1969 — Apollo 11.</b> Армстронг и Олдрин сели на Луну, Коллинз остался на орбите.</p><p><b>1972 — Apollo 17.</b> Последняя пилотируемая посадка на Луну.</p><p><b>1977 — Voyager.</b> Зонды отправились к далёким планетам.</p><p><b>1981 — Space Shuttle.</b> Началась эра многоразовых кораблей.</p><p><b>1990 — Hubble.</b> Космический телескоп вышел на орбиту.</p><p><b>1998 — МКС.</b> Запущены первые модули станции.</p><p><b>2012 — Curiosity.</b> Марсоход сел на Марс.</p><p><b>2021 — «Джеймс Уэбб».</b> Инфракрасный телескоп отправлен в космос.</p><p><b>2020-е — Artemis.</b> Подготовка к возвращению людей на Луну.</p><p><a target='_blank' rel='noopener' href='https://www.nasa.gov/history/explore-nasas-history/'>Архив истории NASA ↗</a></p>",
+"<p><b>1958 — NASA founded.</b> The US civil space agency began work.</p><p><b>1961 — first human in space.</b> Yuri Gagarin flew; Alan Shepard made the first US crewed flight.</p><p><b>1969 — Apollo 11.</b> Armstrong and Aldrin landed on the Moon, Collins stayed in orbit.</p><p><b>1972 — Apollo 17.</b> The last crewed Moon landing.</p><p><b>1977 — Voyager.</b> Probes launched to the distant planets.</p><p><b>1981 — Space Shuttle.</b> The reusable spacecraft era began.</p><p><b>1990 — Hubble.</b> The space telescope reached orbit.</p><p><b>1998 — ISS.</b> First modules of the International Space Station.</p><p><b>2012 — Curiosity.</b> The rover landed on Mars.</p><p><b>2021 — James Webb.</b> The infrared telescope was launched.</p><p><b>2020s — Artemis.</b> Preparing humans to return to the Moon.</p><p><a target='_blank' rel='noopener' href='https://www.nasa.gov/history/explore-nasas-history/'>NASA history archive ↗</a></p>"],
+playNASA:["📚 NASA Haqqda Öyrən","📚 Узнай о NASA","📚 Learn about NASA"],
+histSum:["🧠 Cavab tarixçəm — səhvlərimi təkrar et","🧠 Мой журнал ответов — повтор ошибок","🧠 My answer log — replay mistakes"],
+histDesc:["Səhv cavabların, düzgün cavablar və izahlar burada saxlanılır.","Здесь хранятся твои ошибки, верные ответы и объяснения.","Your mistakes, the correct answers and explanations are kept here."],
+hEmpty:["Hələ tarixçə yoxdur. İlk sualları cavabla!","Журнал пока пуст. Ответь на первые вопросы!","No history yet. Answer your first questions!"],
+repeat:["🔁 Səhv sualları təkrar et","🔁 Повторить ошибки","🔁 Replay mistakes"],
+clear:["Tarixçəni təmizlə","Очистить журнал","Clear log"],
+ach:["🏅 Nailiyyətlər","🏅 Достижения","🏅 Achievements"],
+rst:["İrəliləyişi sıfırla","Сбросить прогресс","Reset progress"],
+rstSure:["Əminsən? Silmək üçün yenidən toxun","Уверен? Нажми ещё раз, чтобы стереть","Sure? Tap again to erase"],
+back:["← Xəritə","← Карта","← Map"],
+box:["🧰 Kosmik təchizat qutusu","🧰 Космический ящик снабжения","🧰 Space supply crate"],
+boxHint:["Qutunu aç, tapşırığı həll et və növbəti qapını aç.","Открой ящик, реши задачу и открой следующий шлюз.","Open the crate, solve the task and open the next door."],
+crate:["📦 TƏCHİZAT QUTUSU · MƏLUMAT KAPSULU","📦 ЯЩИК СНАБЖЕНИЯ · КАПСУЛА ДАННЫХ","📦 SUPPLY CRATE · DATA CAPSULE"],
+door:["HAVA KİLİDİ AÇILDI","ШЛЮЗ ОТКРЫТ","AIRLOCK OPENED"],
+doorFb:["Hər düzgün cavab bir qapını avtomatik açır.","Каждый верный ответ сам открывает шлюз.","Every correct answer opens a door automatically."],
+doorDef:["Əla iş! Növbəti bölməyə keçid hazırdır.","Отлично! Переход в следующий отсек готов.","Great job! The next section is ready."],
+go:["Davam et","Продолжить","Continue"],
+nextRoom:["🚪 Növbəti otağa keç","🚪 В следующий отсек","🚪 Next room"],
+toRes:["Nəticəyə bax","К результату","See result"],
+cMod:["RABİTƏ MODULU","МОДУЛЬ СВЯЗИ","COMMS MODULE"],
+cLock:["HAVA KİLİDİ","ШЛЮЗ","AIRLOCK"],
+cGate:["AÇIQ HAVA KİLİDİ","ОТКРЫТЫЙ ШЛЮЗ","OPEN AIRLOCK"],
+mNear:["Missiya {0} yaxınlıqdadır","Миссия {0} рядом","Mission {0} is nearby"],
+mExpl:["Kəşfiyyat: {0}/{1} missiya açıq","Разведка: открыто миссий {0}/{1}","Exploration: {0}/{1} missions open"],
+lockB:["🔒 Əvvəl missiya {0}-i keç","🔒 Сначала пройди миссию {0}","🔒 Clear mission {0} first"],
+startB:["E: Missiya {0}-i başlat","E: Начать миссию {0}","E: Start mission {0}"],
+gGem:["💎 +1 kristal","💎 +1 кристалл","💎 +1 crystal"],
+gL:["🎁 Hədiyyə: 💡 +1 lampa","🎁 Подарок: 💡 +1 лампа","🎁 Gift: 💡 +1 lamp"],
+gF:["🎁 Hədiyyə: 🛡️ +1 50/50","🎁 Подарок: 🛡️ +1 50/50","🎁 Gift: 🛡️ +1 50/50"],
+g5:["🎁 Hədiyyə: 💎 +5","🎁 Подарок: 💎 +5","🎁 Gift: 💎 +5"],
+welcome:["🚀 Ay səthinə xoş gəldin, kəşfiyyatçı!","🚀 Добро пожаловать на Луну, разведчик!","🚀 Welcome to the Moon, scout!"],
+scanOn:["📡 Skaner aktivdir!","📡 Сканер включён!","📡 Scanner active!"],
+cleared:["🧹 Cavab tarixçəsi təmizləndi","🧹 Журнал ответов очищен","🧹 Answer log cleared"],
+noMist:["Tarixçədə təkrar ediləcək səhv yoxdur.","В журнале нет ошибок для повтора.","No mistakes to replay in the log."],
+lampW:["Lampa","Лампа","Lamp"],
+series:["Seriya","Серия","Streak"],
+pts:["xal","очк.","pts"],
+lvl:["LEVEL","УРОВЕНЬ","LEVEL"],
+hRev:["🔁 SƏHVLƏRİN TƏKRARI","🔁 ПОВТОР ОШИБОК","🔁 MISTAKE REPLAY"],
+hNasa:["🛰️ NASA TARİXÇƏSİ · Bilik missiyası","🛰️ ИСТОРИЯ NASA · Миссия знаний","🛰️ NASA HISTORY · Knowledge mission"],
+qN:["Sual {0}/{1}","Вопрос {0}/{1}","Question {0}/{1}"],
+okN:["Düz: {0} (lazım: {1})","Верно: {0} (нужно: {1})","Correct: {0} (need: {1})"],
+room:["Otaq {0}: sualı cavabla. Düz cavab növbəti hava kilidini açacaq.","Отсек {0}: ответь на вопрос. Верный ответ откроет следующий шлюз.","Room {0}: answer the question. A correct answer opens the next airlock."],
+strk:["🔥 {0} ardıcıl! ","🔥 {0} подряд! ","🔥 {0} in a row! "],
+lampP:[" 💡 +1 lampa!"," 💡 +1 лампа!"," 💡 +1 lamp!"],
+fiftyP:[" 🛡️ +1 50/50!"," 🛡️ +1 50/50!"," 🛡️ +1 50/50!"],
+doorOpen:["🚪 Qapı açıldı! Növbəti bölməyə keçə bilərsən.","🚪 Шлюз открыт! Можно идти в следующий отсек.","🚪 Door opened! You can move to the next section."],
+didu:["Bilirdinizmi?","Знаете ли вы?","Did you know?"],
+wrongAns:["💥 Səhv cavab! Düzgün cavab: ","💥 Неверно! Правильный ответ: ","💥 Wrong! The correct answer: "],
+warn:["⚠️ Səhv cavab qeydə alındı. İzahı oxu.","⚠️ Ошибка записана. Прочитай объяснение.","⚠️ Mistake recorded. Read the explanation."],
+expl:["İzah","Объяснение","Explanation"],
+src:["NASA rəsmi mənbəsi ↗","Источник NASA ↗","NASA official source ↗"],
+corr:["Düzgün cavab","Правильный ответ","Correct answer"],
+lamp2:["💡 İkinci lampa istifadə edildi: ❤️ -1 ürək","💡 Вторая лампа использована: ❤️ -1 сердце","💡 Second lamp used: ❤️ -1 heart"],
+f50msg:["🛡️ 50/50 aktivdir: iki variant qaldı — biri doğru, biri səhv!","🛡️ 50/50: остались два варианта — один верный, один нет!","🛡️ 50/50 active: two options left — one right, one wrong!"],
+hOk:["✅ Düz cavab","✅ Верный ответ","✅ Correct"],
+hBad:["❌ Səhv cavab","❌ Ошибка","❌ Wrong"],
+hYour:["Sənin cavabın","Твой ответ","Your answer"],
+hRight:["Düzgün cavab","Правильный ответ","Correct answer"],
+hWhy:["İzah","Объяснение","Explanation"],
+revWin:["Təkrar uğurla tamamlandı!","Повтор успешно пройден!","Replay completed!"],
+revLose:["Təkrar missiyası bitdi","Миссия повтора завершена","Replay mission ended"],
+nasaWin:["NASA bilik missiyası tamamlandı!","Миссия знаний NASA выполнена!","NASA knowledge mission complete!"],
+nasaLose:["NASA missiyası tamamlanmadı","Миссия NASA не выполнена","NASA mission not completed"],
+cmdWin:["Missiya tamamlandı, komandir!","Миссия выполнена, командир!","Mission complete, commander!"],
+lvWin:["Missiya {0} keçildi!","Миссия {0} пройдена!","Mission {0} cleared!"],
+lose:["Bu dəfə olmadı","В этот раз не вышло","Not this time"],
+rWin:["{0} düz cavab, +{1} xp","{0} верных, +{1} xp","{0} correct, +{1} xp"],
+rLose:["Keçmədi: {0} düz, {1} səhv. Ən azı {2} düz lazımdır. +{3} xp qazandın.","Не пройдено: {0} верных, {1} ошибок. Нужно минимум {2}. Ты получил +{3} xp.","Not passed: {0} right, {1} wrong. You need at least {2}. You earned +{3} xp."],
+toHist:["Tarixçəyə qayıt","Назад к журналу","Back to log"],
+toMapC:["Xəritədə davam et","Продолжить на карте","Continue on the map"],
+retry:["Yenidən cəhd et","Попробовать снова","Try again"],
+nasaAgain:["NASA tarixçəsini oyna","Играть в историю NASA","Play NASA history"],
+replay:["Bu missiyanı yenidən oyna","Пройти эту миссию снова","Replay this mission"],
+toMap:["Xəritəyə qayıt","Вернуться на карту","Back to the map"],
+achT:["🏅 Nailiyyət","🏅 Достижение","🏅 Achievement"],
+pcw:["Xəritə pulu","Карт-монеты","Map coins"],
+needPc:["🔒 {0} xəritəsi üçün {1} 🪙 lazımdır (səndə {2})","🔒 Для карты «{0}» нужно {1} 🪙 (у тебя {2})","🔒 {0} map needs {1} 🪙 (you have {2})"],
+mapOpen:["🗺️ {0} xəritəsi açıldı!","🗺️ Карта «{0}» открыта!","🗺️ {0} map unlocked!"],
+mapInfo:["🗺️ <b>Xəritələr:</b> Ay və 🎲 MİX açıqdır. Planet xəritələrini 🪙 <b>xəritə pulu</b> ilə açırsan: Merkuri 10, Venera 14, Mars 18, Yupiter 24, Saturn 30, Uran 36, Neptun 42. Xəritə pulu Ay və planet missiyalarında (2–3), çətin <b>MİX</b> missiyasında isə daha çox (8–10) qazanılır. Hər planet xəritəsində yalnız həmin planetin sualları var; suallar NASA-nın rəsmi məlumatlarına əsaslanır və hər dəfə təsadüfi seçilir.","🗺️ <b>Карты:</b> Луна и 🎲 MIX открыты. Карты планет открываются за 🪙 <b>карт-монеты</b>: Меркурий 10, Венера 14, Марс 18, Юпитер 24, Сатурн 30, Уран 36, Нептун 42. Монеты дают миссии Луны и планет (2–3), а за трудную миссию <b>MIX</b> — больше (8–10). На карте каждой планеты вопросы только о ней; они основаны на данных NASA и каждый раз выбираются случайно.","🗺️ <b>Maps:</b> the Moon and 🎲 MIX are open. Planet maps are unlocked with 🪙 <b>map coins</b>: Mercury 10, Venus 14, Mars 18, Jupiter 24, Saturn 30, Uranus 36, Neptune 42. Coins come from Moon and planet missions (2–3) and from the hard <b>MIX</b> mission (8–10). Each planet map asks only about that planet; questions follow NASA data and are picked at random every run."]
+};
+Object.assign(T,{
+backB:["← Geri","← Назад","← Back"],
+cardTitle:["📚 NASA Haqqda Öyrən","📚 Узнай о NASA","📚 Learn about NASA"],
+cardDesc:["Kartı oxu, cavabı yadda saxla, sonra kartı çevirib özünü yoxla. Kartlar növbə ilə gəlir. İstəsən öz sual-cavabını da əlavə edə bilərsən.","Прочитай карточку, запомни ответ, затем переверни и проверь себя. Карточки идут по порядку. Можно добавить и свои вопросы.","Read the card, memorize the answer, then flip it to check yourself. Cards come in order. You can add your own questions too."],
+cardQ:["SUAL","ВОПРОС","QUESTION"],cardA:["CAVAB","ОТВЕТ","ANSWER"],
+tapHint:["Cavabı görmək üçün kartı toxun","Нажми на карточку, чтобы увидеть ответ","Tap the card to see the answer"],
+flip:["Cavabı göstər","Показать ответ","Show answer"],flipBack:["↩️ Suala qayıt","↩️ К вопросу","↩️ Back to question"],
+prev:["← Əvvəlki","← Назад","← Previous"],nxt:["Növbəti →","Далее →","Next →"],
+knownB:["✅ Əzbərlədim","✅ Запомнил","✅ I know it"],unknownB:["🔁 Təkrar edəcəm","🔁 Повторю","🔁 Review again"],
+cardN:["Kart {0}/{1}","Карточка {0}/{1}","Card {0}/{1}"],cardProg:["Əzbərlənən: {0}/{1}","Запомнено: {0}/{1}","Memorized: {0}/{1}"],
+shuf:["🔀 Qarışdır","🔀 Перемешать","🔀 Shuffle"],order:["🔢 Ardıcıl sırala","🔢 По порядку","🔢 In order"],
+onlyNew:["Yalnız əzbərlənməyənlər","Только незапомненные","Only not memorized"],
+own:["✏️ Öz kartını əlavə et","✏️ Добавь свою карточку","✏️ Add your own card"],
+ownQ:["Sual (məs. 5+5?)","Вопрос (напр. 5+5?)","Question (e.g. 5+5?)"],ownA:["Cavab (məs. 10)","Ответ (напр. 10)","Answer (e.g. 10)"],
+addC:["Əlavə et","Добавить","Add"],delC:["🗑️ Bu kartı sil","🗑️ Удалить карточку","🗑️ Delete this card"],
+cAdded:["✏️ Kart əlavə olundu","✏️ Карточка добавлена","✏️ Card added"],cFill:["Sual və cavabı yaz","Заполни вопрос и ответ","Fill in the question and answer"],
+allDone:["🎉 Bütün kartlar əzbərləndi!","🎉 Все карточки выучены!","🎉 All cards memorized!"],
+aiBtn:["🤖 AI Köməkçi","🤖 ИИ-помощник","🤖 AI Assistant"],aiTitle:["🤖 AI Köməkçi","🤖 ИИ-помощник","🤖 AI Assistant"],aiBadge:["Ağıllı müəllim","Умный наставник","Smart tutor"],
+aiNote:["Bu köməkçi cihazında işləyir: oyunun bilik bazasından (suallar, planetlər, NASA kartları) cavab tapır, səhvlərini təhlil edir, şəxsi plan qurur və sənə sual verir.","Помощник работает на твоём устройстве: ищет ответы в базе знаний игры (вопросы, планеты, карточки NASA), разбирает ошибки, составляет план и задаёт вопросы.","This assistant runs on your device: it finds answers in the game's knowledge base (questions, planets, NASA cards), analyses your mistakes, builds a study plan and quizzes you."],
+aiPh:["Sualını yaz… (məs. Mars haqqında danış)","Напиши вопрос… (напр. расскажи о Марсе)","Type your question… (e.g. tell me about Mars)"],
+aiSend:["Göndər","Отправить","Send"],
+aiHi:["Salam! Mən Kosmik Kəşf AI köməkçisiyəm 🤖 Kosmos, planetlər və NASA haqqında soruş, hesab məsələsi yaz (məs. 5+5) və ya «sual ver» de.","Привет! Я ИИ-помощник Космического открытия 🤖 Спрашивай о космосе, планетах и NASA, пиши примеры (напр. 5+5) или скажи «задай вопрос».","Hi! I'm the Cosmic Discovery AI assistant 🤖 Ask about space, planets and NASA, type a sum (e.g. 5+5) or say “quiz me”."],
+aiTyping:["düşünürəm…","думаю…","thinking…"],
+chipWeak:["📊 Zəif mövzularım","📊 Мои слабые темы","📊 My weak topics"],chipQuiz:["🎯 Mənə sual ver","🎯 Задай вопрос","🎯 Quiz me"],chipFact:["✨ Maraqlı fakt","✨ Интересный факт","✨ Fun fact"],chipPlan:["📋 Şəxsi plan","📋 Личный план","📋 My study plan"],chipMars:["🔴 Mars haqqında","🔴 О Марсе","🔴 About Mars"],
+aiNoHist:["Hələ cavab tarixçən yoxdur. Əvvəl bir neçə sual cavabla, sonra zəif mövzularını təhlil edim!","Пока нет истории ответов. Ответь на несколько вопросов, и я разберу твои слабые темы!","No answer history yet. Answer a few questions first and I'll analyse your weak topics!"],
+aiWeakHead:["📊 Təhlil: cəmi {0} cavab, düz {1} (%{2}).","📊 Анализ: всего ответов {0}, верных {1} ({2}%).","📊 Analysis: {0} answers in total, {1} correct ({2}%)."],
+aiWeakList:["Ən çox səhv etdiyin mövzular:","Чаще всего ошибки в темах:","Topics where you slip most:"],
+aiNoWeak:["Səhv etdiyin mövzu yoxdur — əla gedirsən! 🌟","Слабых тем нет — отлично справляешься! 🌟","No weak topics — you're doing great! 🌟"],
+aiTry:["Aşağıdakı düymə ilə səhvlərini təkrar et və ya mənə «sual ver» yaz.","Повтори ошибки кнопкой ниже или напиши мне «задай вопрос».","Replay your mistakes with the button below or ask me to “quiz me”."],
+aiPlanHead:["📋 Sənin planın:","📋 Твой план:","📋 Your plan:"],
+aiPlan1:["1) NASA kartlarından {0} kart əzbərlənməyib — gündə 5 kart öyrən.","1) Осталось {0} карточек NASA — учи по 5 в день.","1) {0} NASA cards left — memorize 5 a day."],
+aiPlan2:["2) Zəif mövzu: {0} — bu mövzunun missiyasını yenidən keç.","2) Слабая тема: {0} — пройди миссию этой темы ещё раз.","2) Weak topic: {0} — replay that topic's mission."],
+aiPlan2none:["2) Hələ zəif mövzun yoxdur — yeni planet xəritəsi aç! 🪐","2) Слабых тем пока нет — открой новую карту планеты! 🪐","2) No weak topics yet — unlock a new planet map! 🪐"],
+aiPlan3:["3) Hər gün mənə «sual ver» yaz və 3 düz cavab ver.","3) Каждый день пиши мне «задай вопрос» и отвечай верно 3 раза.","3) Ask me to “quiz me” every day and get 3 right."],
+aiQuizIntro:["🎯 Sual:","🎯 Вопрос:","🎯 Question:"],aiRight:["✅ Düzdür!","✅ Верно!","✅ Correct!"],aiWrong:["❌ Düzgün cavab:","❌ Правильный ответ:","❌ The right answer:"],
+aiMore:["Daha bir sual istəyirsən? «sual ver» yaz.","Хочешь ещё вопрос? Напиши «задай вопрос».","Want another? Type “quiz me”."],
+aiFactH:["✨ Bilirdinizmi?","✨ Знаете ли вы?","✨ Did you know?"],
+aiPlanetH:["🪐 {0} — qısa məlumat","🪐 {0} — коротко","🪐 {0} — quick facts"],
+aiDiam:["Diametr","Диаметр","Diameter"],aiDay:["Gün (öz oxu ətrafında)","Сутки","Day (one spin)"],aiYear:["İl","Год","Year"],aiTemp:["Orta temperatur","Средняя температура","Average temperature"],aiDist:["Günəşdən məsafə","Расстояние от Солнца","Distance from the Sun"],aiGrav:["Cazibə (Yerə nisbətən)","Гравитация (от земной)","Gravity (vs Earth)"],aiAtm:["Atmosfer","Атмосфера","Atmosphere"],aiMis:["NASA missiyası","Миссия NASA","NASA mission"],
+aiFound:["Bilik bazasında tapdım:","Нашёл в базе знаний:","Found in the knowledge base:"],
+aiCalc:["🧮 Nəticə: {0}","🧮 Результат: {0}","🧮 Result: {0}"],
+aiNone:["Bunu dəqiq bilmirəm 🤔 Kosmos, planetlər, Ay, raketlər, ISS və ya NASA haqqında soruş. Məsələn: «Mars haqqında danış», «Apollo 11» və ya «sual ver».","Точно не знаю 🤔 Спроси про космос, планеты, Луну, ракеты, МКС или NASA. Например: «расскажи о Марсе», «Apollo 11» или «задай вопрос».","I'm not sure 🤔 Ask about space, planets, the Moon, rockets, the ISS or NASA. For example: “tell me about Mars”, “Apollo 11” or “quiz me”."]
+});
+const DT=[["Ay","Луна","The Moon"],["Günəş və radiasiya","Солнце и радиация","The Sun and radiation"],["Oksigen və həyat dəstəyi","Кислород и жизнеобеспечение","Oxygen and life support"],["Enerji","Энергия","Energy"],["Qida və su","Еда и вода","Food and water"],["Raket və missiya","Ракета и миссия","Rockets and missions"],["Astronavt həyatı","Жизнь астронавта","Astronaut life"],["Planetlər","Планеты","Planets"],["Meteorit və təhlükələr","Метеориты и опасности","Meteors and hazards"],["Mars və gələcək","Марс и будущее","Mars and the future"]];
+const RANKS=[[["Kursant","Курсант","Cadet"],0],[["Kosmonavt","Космонавт","Astronaut"],150],[["Pilot","Пилот","Pilot"],400],[["Komandir","Командир","Commander"],800],[["Baza rəisi","Начальник базы","Base chief"],1400],[["Ay əfsanəsi","Лунная легенда","Moon legend"],2200]];
+const ACH={first:["🥇",["İlk addım","Первый шаг","First step"],["1-ci missiyanı keç","Пройди 1-ю миссию","Clear mission 1"]],s5:["🔥",["Alovlu seriya","Огненная серия","Fire streak"],["5 ardıcıl düz cavab","5 верных подряд","5 correct in a row"]],lamp:["💡",["Lampa ustası","Мастер лампы","Lamp master"],["Lampa işlət","Используй лампу","Use a lamp"]],f50:["🛡️",["Ağıllı seçim","Умный выбор","Smart choice"],["50/50 işlət","Используй 50/50","Use 50/50"]],gem:["💎",["Kristal ovçusu","Охотник за кристаллами","Crystal hunter"],["20 kristal topla","Собери 20 кристаллов","Collect 20 crystals"]],perf:["🌟",["Mükəmməl","Безупречно","Flawless"],["Heç səhvsiz missiya","Миссия без ошибок","A mission without mistakes"]],all:["🏆",["Missiya tamam","Миссия выполнена","Mission complete"],["10-cu missiyanı keç","Пройди 10-ю миссию","Clear mission 10"]]};
+const GOOD=[["Əla! 🎉","Düzdür! ✨","Bravo, astronavt! 🚀","Dəqiq cavab! 🌟"],["Отлично! 🎉","Верно! ✨","Браво, астронавт! 🚀","Точный ответ! 🌟"],["Great! 🎉","Correct! ✨","Bravo, astronaut! 🚀","Spot on! 🌟"]];
+const FACTS=`ISS Yer ətrafında gündə təxminən 16 dəfə dövr edir.|МКС делает около 16 витков вокруг Земли в сутки.|The ISS orbits Earth about 16 times a day.
+Voyager 1 insan tərəfindən göndərilmiş ən uzaq cisimlərdən biridir.|Voyager 1 — один из самых далёких объектов, созданных человеком.|Voyager 1 is one of the farthest human-made objects.
+Hubble 1990-cı ildən bəri kosmosdan şəkillər çəkir.|Hubble снимает космос с 1990 года.|Hubble has been imaging the cosmos since 1990.
+Ayda atmosfer olmadığı üçün astronavt ayaq izləri çox uzun müddət qala bilər.|На Луне нет атмосферы, поэтому следы астронавтов могут сохраняться очень долго.|With no atmosphere on the Moon, astronaut footprints can last a very long time.
+James Webb teleskopu kosmosa infraqırmızı işıqla baxır.|Телескоп «Джеймс Уэбб» смотрит на космос в инфракрасном свете.|The James Webb telescope observes space in infrared light.
+Artemis adı yunan mifologiyasında Apollonun əkiz bacısından gəlir.|Имя Artemis — от сестры-близнеца Аполлона в греческой мифологии.|Artemis is named after Apollo's twin sister in Greek mythology.
+Ingenuity helikopteri Marsda 70-dən çox uçuş etdi.|Вертолёт Ingenuity совершил на Марсе более 70 полётов.|The Ingenuity helicopter made more than 70 flights on Mars.
+ISS Yerdən çılpaq gözlə görünə bilir.|МКС можно увидеть с Земли невооружённым глазом.|The ISS can be seen from Earth with the naked eye.
+Apollo 11-in Ay modulunun kompüteri indiki telefonlardan qat-qat zəif idi.|Компьютер лунного модуля Apollo 11 был намного слабее современного телефона.|The Apollo 11 lunar module computer was far less powerful than a modern phone.
+Marsda Günəş batanda səma mavimtıl rəngə çalır.|На Марсе закат выглядит голубоватым.|Sunsets on Mars look bluish.`.split("\n").map(l=>l.split("|"));
+
+const RAW=`Ayın Yerdən orta məsafəsi?|Среднее расстояние от Земли до Луны?|Average Earth–Moon distance?|≈384 000 km|≈38 000 km|≈3 840 000 km|≈150 000 km
+Ayda atmosfer necədir?|Какая атмосфера на Луне?|What is the Moon's atmosphere like?|Praktiki olaraq yoxdur§Почти отсутствует§Practically none|Qalın və azotlu§Плотная, азотная§Thick and nitrogen-rich|Oksigenlə zəngin§Богата кислородом§Rich in oxygen|Karbon qazı buludları§Облака углекислого газа§Carbon dioxide clouds
+Ayın Yer ətrafında dövr müddəti?|Период обращения Луны вокруг Земли?|The Moon's orbital period around Earth?|≈27 gün§≈27 суток§≈27 days|7 gün§7 суток§7 days|≈365 gün§≈365 суток§≈365 days|≈1 gün§≈1 сутки§≈1 day
+Ayda ilk addım atan insan?|Кто первым ступил на Луну?|Who first walked on the Moon?|Nil Armstronq§Нил Армстронг§Neil Armstrong|Baz Oldrin§Базз Олдрин§Buzz Aldrin|Yuri Qaqarin§Юрий Гагарин§Yuri Gagarin|Con Qlenn§Джон Гленн§John Glenn
+Apollo 11 Aya hansı ildə endi?|В каком году Apollo 11 сел на Луну?|In what year did Apollo 11 land on the Moon?|1969|1961|1975|1957
+Ayın cazibəsi Yerinkindən?|Гравитация Луны по сравнению с земной?|The Moon's gravity compared with Earth's?|≈6 dəfə zəifdir§≈ в 6 раз слабее§≈6 times weaker|2 dəfə güclüdür§В 2 раза сильнее§2 times stronger|Eynidir§Такая же§The same|≈100 dəfə zəifdir§≈ в 100 раз слабее§≈100 times weaker
+Ayın tünd düzənlikləri necə adlanır?|Как называются тёмные равнины Луны?|What are the Moon's dark plains called?|Dənizlər (mare)§Моря (mare)§Seas (maria)|Vulkanlar§Вулканы§Volcanoes|Dağ silsilələri§Горные хребты§Mountain ranges|Buzlaqlar§Ледники§Glaciers
+Ayın səthini örtən toz təbəqəsi?|Как называется пылевой слой на Луне?|What is the dust layer covering the Moon called?|Reqolit§Реголит§Regolith|Lyoss§Лёсс§Loess|Humus§Гумус§Humus|Pemza§Пемза§Pumice
+Ayın diametri?|Диаметр Луны?|The Moon's diameter?|≈3 474 km|≈12 742 km|≈1 000 km|≈6 779 km
+Ayda gündüz təxminən nə qədər davam edir?|Сколько примерно длится лунный день?|How long does a lunar day last, roughly?|≈14 Yer günü§≈14 земных суток§≈14 Earth days|12 saat§12 часов§12 hours|1 saat§1 час§1 hour|≈1 il§≈1 год§≈1 year
+Ayda səs necə yayılır?|Как распространяется звук на Луне?|How does sound travel on the Moon?|Havasız olduğu üçün yayılmır§Не распространяется — нет воздуха§It doesn't — there is no air|Yerdəki kimi§Как на Земле§Just like on Earth|Yerdən sürətli§Быстрее, чем на Земле§Faster than on Earth|Yalnız gecə eşidilir§Слышен только ночью§Heard only at night
+Ayda su buzu harada ehtimal olunur?|Где на Луне ожидается водяной лёд?|Where is water ice expected on the Moon?|Qütblərdə daimi kölgəli kraterlərdə§В вечно затенённых полярных кратерах§In permanently shadowed polar craters|Ekvatorda günəşli yerdə§На солнечном экваторе§On the sunlit equator|Dənizlərin mərkəzində§В центре «морей»§In the middle of the maria|Dağların zirvəsində§На горных вершинах§On mountain peaks
+---
+Günəş nədir?|Что такое Солнце?|What is the Sun?|Ulduz§Звезда§A star|Planet§Планета§A planet|Peyk§Спутник§A moon|Kometa§Комета§A comet
+Günəş işığı Yerə neçə dəqiqəyə çatır?|За сколько минут свет Солнца доходит до Земли?|How many minutes does sunlight take to reach Earth?|≈8 dəqiqə§≈8 минут§≈8 minutes|≈8 saniyə§≈8 секунд§≈8 seconds|≈1 saat§≈1 час§≈1 hour|≈1 gün§≈1 сутки§≈1 day
+Günəş ləkələri nədir?|Что такое солнечные пятна?|What are sunspots?|Günəşin nisbətən soyuq sahələri§Относительно холодные области Солнца§Relatively cooler areas of the Sun|Buludlar§Облака§Clouds|Kraterlər§Кратеры§Craters|Planetlər§Планеты§Planets
+Günəşdən gələn yüklü hissəcik axını?|Поток заряженных частиц от Солнца?|The stream of charged particles from the Sun?|Günəş küləyi§Солнечный ветер§Solar wind|Ay küləyi§Лунный ветер§Lunar wind|Kosmik toz§Космическая пыль§Cosmic dust|Qara dəlik§Чёрная дыра§A black hole
+Yerdə radiasiyadan bizi nə qoruyur?|Что защищает нас на Земле от радиации?|What protects us from radiation on Earth?|Atmosfer və maqnit sahəsi§Атмосфера и магнитное поле§Atmosphere and magnetic field|Okeanlar§Океаны§Oceans|Dağlar§Горы§Mountains|Buludlar§Облака§Clouds
+Ayda radiasiya Yerdən?|Радиация на Луне по сравнению с Землёй?|Radiation on the Moon compared with Earth?|Daha yüksəkdir§Выше§Higher|Daha aşağıdır§Ниже§Lower|Eynidir§Такая же§The same|Yoxdur§Отсутствует§None
+Qütb parıltısı (aurora) nədən yaranır?|Из-за чего возникают полярные сияния?|What causes auroras?|Günəş hissəciklərinin atmosferlə toqquşmasından§Столкновения солнечных частиц с атмосферой§Solar particles hitting the atmosphere|Ay işığından§Лунного света§Moonlight|Şimşəkdən§Молний§Lightning|Okean dalğalarından§Океанских волн§Ocean waves
+Günəşin səthinin temperaturu təxminən?|Температура поверхности Солнца примерно?|The Sun's surface temperature is about?|≈5 500 °C|≈550 °C|≈55 000 °C|≈100 °C
+Günəş tutulmasında nə baş verir?|Что происходит при солнечном затмении?|What happens during a solar eclipse?|Ay Günəşi örtür§Луна закрывает Солнце§The Moon covers the Sun|Yer Günəşi örtür§Земля закрывает Солнце§Earth covers the Sun|Günəş sönür§Солнце гаснет§The Sun goes out|Mars Günəşi örtür§Марс закрывает Солнце§Mars covers the Sun
+NASA-nın Parker Solar Probe zondu nəyi öyrənir?|Что изучает зонд NASA Parker Solar Probe?|What does NASA's Parker Solar Probe study?|Günəşin atmosferini (tacı)§Атмосферу (корону) Солнца§The Sun's atmosphere (corona)|Marsın qumunu§Песок Марса§Martian sand|Ayın kraterlərini§Кратеры Луны§Lunar craters|Saturnun peyklərini§Спутники Сатурна§Saturn's moons
+Günəş sistemi kütləsinin təxminən neçə faizi Günəşdədir?|Какая доля массы Солнечной системы приходится на Солнце?|About what share of the Solar System's mass is the Sun?|≈99,8 %§≈99,8 %§≈99.8 %|≈50 %|≈10 %|≈75 %
+Günəş fırtınası nədir?|Что такое солнечная буря?|What is a solar storm?|Günəşdən yüklü hissəciklərin və enerjinin püskürməsi§Выброс заряженных частиц и энергии от Солнца§An eruption of charged particles and energy from the Sun|Yerdə güclü külək§Сильный ветер на Земле§Strong wind on Earth|Meteor yağışı§Метеорный дождь§A meteor shower|Okean tufanı§Океанский шторм§An ocean storm
+---
+Havanın ən çox hissəsi hansı qazdır?|Какой газ составляет большую часть воздуха?|Which gas makes up most of the air?|Azot§Азот§Nitrogen|Oksigen§Кислород§Oxygen|Karbon qazı§Углекислый газ§Carbon dioxide|Hidrogen§Водород§Hydrogen
+Havada oksigen təxminən neçə faizdir?|Сколько процентов кислорода в воздухе?|About what percent of air is oxygen?|≈21 %|≈78 %|≈50 %|≈5 %
+Nəfəs verərkən orqanizm hansı qazı ayırır?|Какой газ выделяет организм при выдохе?|Which gas does the body release when breathing out?|Karbon qazı (CO₂)§Углекислый газ (CO₂)§Carbon dioxide (CO₂)|Hidrogen§Водород§Hydrogen|Helium§Гелий§Helium|Metan§Метан§Methane
+Bitkilər fotosintezdə nə ayırır?|Что выделяют растения при фотосинтезе?|What do plants release in photosynthesis?|Oksigen§Кислород§Oxygen|Azot§Азот§Nitrogen|Neon§Неон§Neon|Metan§Метан§Methane
+ISS-də CO₂-ni havadan təmizləyən qurğu?|Устройство МКС, убирающее CO₂ из воздуха?|The ISS device that removes CO₂ from the air?|CO₂ təmizləyici (scrubber)§Поглотитель CO₂§CO₂ scrubber|Radar§Радар§Radar|Günəş paneli§Солнечная панель§Solar panel|Hidravlik pres§Гидравлический пресс§Hydraulic press
+Elektrolizlə sudan oksigen necə alınır?|Как получают кислород из воды электролизом?|How is oxygen obtained from water by electrolysis?|Su elektrik cərəyanı ilə parçalanır§Воду разлагают электрическим током§Water is split with electric current|Su qaynadılır§Воду кипятят§Water is boiled|Su dondurulur§Воду замораживают§Water is frozen|Su süzülür§Воду фильтруют§Water is filtered
+Skafandr astronavtı nədən qoruyur?|От чего защищает скафандр?|What does a spacesuit protect an astronaut from?|Vakuum, temperatur və radiasiyadan§Вакуума, перепадов температуры и радиации§Vacuum, temperature extremes and radiation|Yalnız yağışdan§Только от дождя§Only rain|Yalnız küləkdən§Только от ветра§Only wind|Yalnız səs-küydən§Только от шума§Only noise
+Hermetik bölmə nə üçün lazımdır?|Для чего нужен герметичный модуль?|Why is a sealed module needed?|Hava və təzyiqi saxlamaq üçün§Чтобы удерживать воздух и давление§To keep air and pressure inside|Daha yüngül olmaq üçün§Чтобы быть легче§To be lighter|Səs yaymaq üçün§Чтобы распространять звук§To spread sound|Rəngi dəyişmək üçün§Чтобы менять цвет§To change colour
+Nəfəs almaq üçün orqanizmə ən vacib qaz?|Самый необходимый для дыхания газ?|The gas the body needs most to breathe?|Oksigen§Кислород§Oxygen|Arqon§Аргон§Argon|Neon§Неон§Neon|Helium§Гелий§Helium
+MOXIE təcrübəsi Marsda nə etdi?|Что сделал эксперимент MOXIE на Марсе?|What did the MOXIE experiment do on Mars?|Mars CO₂-dən oksigen istehsal etdi§Получал кислород из марсианского CO₂§Made oxygen from Martian CO₂|Su buzu qazdı§Бурил водяной лёд§Drilled water ice|Mars səslərini yazdı§Записывал звуки Марса§Recorded Martian sounds|Toz fırtınası yaratdı§Создавал пылевые бури§Created dust storms
+ISS-də içməli su haradan təmin olunur?|Откуда на МКС берут питьевую воду?|Where does the ISS get drinking water?|Sidik və nəmin təkrar emalından§Из переработки мочи и влаги§From recycling urine and moisture|Yağışdan§Из дождя§From rain|Okeandan nasosla§Качают из океана§Pumped from the ocean|Buz kəsməklə§Колют лёд§Cut from ice
+Kosmosda niyə təzyiqli hava lazımdır?|Почему в космосе нужен воздух под давлением?|Why is pressurized air needed in space?|Çünki kosmosda vakuum var§Потому что в космосе вакуум§Because space is a vacuum|Çünki kosmos çox işıqlıdır§Потому что в космосе слишком светло§Because space is too bright|Çünki kosmos səslidir§Потому что в космосе шумно§Because space is noisy|Çünki kosmos nəmlidir§Потому что в космосе влажно§Because space is humid
+---
+Günəş panelləri nə istehsal edir?|Что вырабатывают солнечные панели?|What do solar panels produce?|Elektrik§Электричество§Electricity|Su§Вода§Water|Oksigen§Кислород§Oxygen|Qida§Еда§Food
+Elektrik cərəyanının ölçü vahidi?|Единица измерения силы тока?|The unit of electric current?|Amper§Ампер§Ampere|Metr§Метр§Metre|Kiloqram§Килограмм§Kilogram|Saniyə§Секунда§Second
+Gücün ölçü vahidi?|Единица измерения мощности?|The unit of power?|Vatt§Ватт§Watt|Litr§Литр§Litre|Dərəcə§Градус§Degree|Hers§Герц§Hertz
+Ay bazasına uzun gecədə enerji üçün nə lazımdır?|Что нужно лунной базе для энергии в долгую ночь?|What does a Moon base need for power during the long night?|Akkumulyator və ya nüvə mənbəyi§Аккумуляторы или ядерный источник§Batteries or a nuclear source|Yel dəyirmanı§Ветряная мельница§A windmill|Su çarxı§Водяное колесо§A water wheel|Yağış§Дождь§Rain
+Voyager zondlarını enerji ilə nə təmin edir?|Что питает зонды Voyager?|What powers the Voyager probes?|Radioizotop generatorlar (RTG)§Радиоизотопные генераторы (РИТЭГ)§Radioisotope generators (RTG)|Günəş panelləri§Солнечные панели§Solar panels|Külək§Ветер§Wind|Dizel mühərriki§Дизельный двигатель§A diesel engine
+Akkumulyator nə edir?|Что делает аккумулятор?|What does a battery do?|Enerjini saxlayır§Накапливает энергию§Stores energy|Enerjini məhv edir§Уничтожает энергию§Destroys energy|İşıq yayır§Излучает свет§Emits light|Səs yaradır§Создаёт звук§Makes sound
+ISS-in günəş panelləri enerjini haradan alır?|Откуда солнечные панели МКС берут энергию?|Where do the ISS solar arrays get their energy?|Günəşdən§От Солнца§From the Sun|Yerin nüvəsindən§Из ядра Земли§From Earth's core|Aydan§От Луны§From the Moon|Okeandan§Из океана§From the ocean
+Yanacaq elementi hansı qazlardan elektrik alır?|Из каких газов топливный элемент получает электричество?|Which gases does a fuel cell combine to make electricity?|Hidrogen və oksigen§Водород и кислород§Hydrogen and oxygen|Azot və neon§Азот и неон§Nitrogen and neon|Helium və arqon§Гелий и аргон§Helium and argon|Metan və xlor§Метан и хлор§Methane and chlorine
+Açıq elektrik dövrəsində cərəyan?|Что происходит с током в разомкнутой цепи?|What happens to current in an open circuit?|Axmır§Не течёт§Does not flow|İki dəfə artır§Удваивается§Doubles|Sürətlənir§Ускоряется§Speeds up|İşığa çevrilir§Превращается в свет§Turns into light
+Günəş enerjisi bərpa olunan enerjidirmi?|Является ли солнечная энергия возобновляемой?|Is solar energy renewable?|Bəli, tükənməz mənbədir§Да, это неисчерпаемый источник§Yes, it is practically inexhaustible|Xeyr, bir ildə bitir§Нет, закончится за год§No, it runs out in a year|Yalnız Ayda işləyir§Работает только на Луне§It works only on the Moon|Yalnız qışda işləyir§Работает только зимой§It works only in winter
+Ayda günəş panelləri üçün əsas problem?|Главная проблема солнечных панелей на Луне?|The main problem for solar panels on the Moon?|Toz və uzun gecə§Пыль и долгая ночь§Dust and the long night|Yağış§Дождь§Rain|Tufanlar§Штормы§Storms|Dəniz suyu§Морская вода§Seawater
+Fotoelement işığı nəyə çevirir?|Во что фотоэлемент превращает свет?|What does a photovoltaic cell turn light into?|Elektrik enerjisinə§В электричество§Electricity|Səsə§В звук§Sound|Suya§В воду§Water|Qidaya§В еду§Food
+---
+Bitkinin böyüməsi üçün nə lazımdır?|Что нужно растению для роста?|What does a plant need to grow?|İşıq, su, qida maddələri§Свет, вода, питательные вещества§Light, water, nutrients|Yalnız qaranlıq§Только темнота§Only darkness|Yalnız səs§Только звук§Only sound|Yalnız qum§Только песок§Only sand
+NASA-nın Veggie sistemi kosmosda nə yetişdirir?|Что выращивает система NASA Veggie в космосе?|What does NASA's Veggie system grow in space?|Tərəvəz bitkiləri§Овощные растения§Vegetable plants|Daşlar§Камни§Rocks|Metal§Металл§Metal|Buz§Лёд§Ice
+Fotosintez üçün bitkiyə hansı qaz lazımdır?|Какой газ нужен растению для фотосинтеза?|Which gas do plants need for photosynthesis?|Karbon qazı§Углекислый газ§Carbon dioxide|Helium§Гелий§Helium|Neon§Неон§Neon|Xlor§Хлор§Chlorine
+Suyun qaynama temperaturu (dəniz səviyyəsində)?|Температура кипения воды (на уровне моря)?|Boiling point of water at sea level?|100 °C|0 °C|50 °C|212 °C
+Suyun donma temperaturu?|Температура замерзания воды?|Freezing point of water?|0 °C|100 °C|−10 °C|32 °C
+Kosmik yeməklər niyə çox vaxt qurudulur?|Почему космическую еду часто сушат?|Why is space food often dehydrated?|Yüngül olur və uzun saxlanılır§Она легче и дольше хранится§It is lighter and keeps longer|Daha rəngli olur§Она становится цветной§It gets more colourful|Daha səsli olur§Она становится шумной§It gets louder|Daha ağır olur§Она становится тяжелее§It gets heavier
+Çəkisizlikdə su damlası necə davranır?|Как ведёт себя капля воды в невесомости?|How does a water drop behave in weightlessness?|Kürə şəklində süzür§Принимает форму шара и парит§Floats as a sphere|Dərhal yerə düşür§Сразу падает§Falls immediately|Buza çevrilir§Превращается в лёд§Turns into ice|Yox olur§Исчезает§Disappears
+Suyu təmizləmək üçün hansı üsullar işlənir?|Какие методы используют для очистки воды?|Which methods are used to purify water?|Süzmə və distillə§Фильтрацию и дистилляцию§Filtration and distillation|Boyama§Окрашивание§Painting|Əzmə§Дробление§Crushing|Maqnitləmə§Намагничивание§Magnetizing
+Orqanizm üçün ən vacib maye?|Самая необходимая организму жидкость?|The liquid the body needs most?|Su§Вода§Water|Neft§Нефть§Oil|Benzin§Бензин§Petrol|Sirkə§Уксус§Vinegar
+Kosmosda duz və istiot niyə maye halında olur?|Почему соль и перец в космосе жидкие?|Why are salt and pepper liquid on spacecraft?|Dənəciklər havada uçmasın deyə§Чтобы крупинки не летали в воздухе§So grains don't float into the air|Daha dadlı olsun deyə§Чтобы было вкуснее§To taste better|Soyuq qalsın deyə§Чтобы оставались холодными§To stay cold|Rəngi dəyişsin deyə§Чтобы менялся цвет§To change colour
+Hidroponika nədir?|Что такое гидропоника?|What is hydroponics?|Bitkini torpaqsız, qida məhlulunda becərmək§Выращивание растений без почвы в растворе§Growing plants without soil in a nutrient solution|Quru çöldə əkin§Посев в сухой степи§Planting in a dry field|Dənizdə balıq yetişdirmək§Выращивание рыбы в море§Fish farming at sea|Buz yığmaq§Сбор льда§Collecting ice
+Əsas enerji verən qida maddələri hansılardır?|Какие питательные вещества дают основную энергию?|Which nutrients mainly provide energy?|Karbohidratlar§Углеводы§Carbohydrates|Duz§Соль§Salt|Su§Вода§Water|Rəngləyici§Краситель§Dye
+---
+Raketi yerdən qaldıran qüvvə?|Какая сила поднимает ракету?|What force lifts a rocket off the ground?|İtələmə qüvvəsi§Тяга§Thrust|Maqnit§Магнит§Magnetism|Külək§Ветер§Wind|Sürtünmə§Трение§Friction
+Apollo missiyalarını Aya aparan raket?|Какая ракета отправляла Apollo к Луне?|Which rocket sent Apollo to the Moon?|Saturn V|Atlas V|Falcon 9|Soyuz
+Artemis missiyaları üçün NASA-nın raketi?|Ракета NASA для миссий Artemis?|NASA's rocket for the Artemis missions?|SLS (Space Launch System)|Saturn V|Ariane 5|Vostok
+Yer ətrafında orbital sürət təxminən?|Первая космическая скорость примерно?|Orbital speed around Earth is about?|≈7,8 km/s§≈7,8 км/с§≈7.8 km/s|≈78 km/s§≈78 км/с§≈78 km/s|≈0,78 km/s§≈0,78 км/с§≈0.78 km/s|≈300 km/s§≈300 км/с§≈300 km/s
+Raketin pillələri niyə ayrılır?|Зачем ступени ракеты отделяются?|Why do rocket stages separate?|Boş çəkini atmaq üçün§Чтобы сбросить пустые баки и вес§To drop empty tanks and weight|Rəngi dəyişmək üçün§Чтобы поменять цвет§To change colour|Səs yaratmaq üçün§Чтобы создать звук§To make noise|Soyumaq üçün§Чтобы охладиться§To cool down
+Nyutonun 3-cü qanunu raketdə necə işləyir?|Как в ракете работает третий закон Ньютона?|How does Newton's third law work in a rocket?|Qazlar aşağı, raket yuxarı itələnir§Газы вниз — ракета вверх§Gases go down, the rocket goes up|Raket havanı sorur§Ракета втягивает воздух§The rocket sucks in air|Yer raketi çəkir§Земля тянет ракету§Earth pulls it up|Külək itələyir§Ветер толкает§Wind pushes it
+Kosmik gəmi Yerə qayıdanda niyə qızır?|Почему корабль нагревается при возвращении?|Why does a spacecraft heat up on re-entry?|Atmosferlə sürtünmə və sıxılma§Трение и сжатие воздуха§Friction and compression in the atmosphere|Günəş yaxındır§Солнце близко§The Sun is close|Mühərrik şişir§Двигатель раздувается§The engine swells|Ay işığı§Свет Луны§Moonlight
+Uçuşu Yerdən idarə edən mərkəz?|Центр, управляющий полётом с Земли?|The center that guides a flight from Earth?|Missiya İdarəetmə Mərkəzi§Центр управления полётами§Mission Control|Hava limanı§Аэропорт§Airport|Planetarium§Планетарий§Planetarium|Muzey§Музей§Museum
+Geri sayımda "T-0" nə deməkdir?|Что значит «T-0» при обратном отсчёте?|What does "T-0" mean in a countdown?|Buraxılış anı§Момент старта§Liftoff moment|Qəza§Авария§An accident|Yanacaq doldurma§Заправка§Refuelling|Nahar vaxtı§Время обеда§Lunch time
+Kosmosun şərti sərhəddi (Karman xətti)?|Условная граница космоса (линия Кармана)?|The edge of space (Kármán line)?|≈100 km|≈10 km|≈1 000 km|≈1 km
+NASA-nın Orion gəmisi nə üçündür?|Для чего нужен корабль NASA Orion?|What is NASA's Orion spacecraft for?|Astronavtları Aya aparmaq§Доставка астронавтов к Луне§Carrying astronauts to the Moon|Yük tankeri§Грузовой танкер§A cargo tanker|Teleskop§Телескоп§A telescope|Peyk§Спутник§A satellite
+Artemis I (2022) missiyası necə idi?|Какой была миссия Artemis I (2022)?|What was the Artemis I mission (2022)?|Ekipajsız Ay ətrafı uçuşu§Беспилотный облёт Луны§An uncrewed flight around the Moon|Marsa eniş§Посадка на Марс§A Mars landing|Ayda ekipajlı eniş§Посадка людей на Луну§A crewed Moon landing|Günəşə uçuş§Полёт к Солнцу§A flight to the Sun
+---
+Mikroqravitasiya nədir?|Что такое микрогравитация?|What is microgravity?|Çox zəif cazibə təsiri§Очень слабое действие гравитации§A very weak gravity effect|Güclü maqnit§Сильный магнит§A strong magnet|Külək§Ветер§Wind|Soyuq§Холод§Cold
+ISS Yer ətrafında bir dövrəni təxminən nə qədərdə edir?|За сколько МКС делает один виток вокруг Земли?|How long does the ISS take for one orbit of Earth?|≈90 dəqiqə§≈90 минут§≈90 minutes|≈90 saat§≈90 часов§≈90 hours|≈9 dəqiqə§≈9 минут§≈9 minutes|≈90 gün§≈90 суток§≈90 days
+Astronavtlar sağlam qalmaq üçün kosmosda nə ilə məşğul olur?|Чем астронавты занимаются, чтобы сохранить здоровье?|What do astronauts do in space to stay healthy?|İdman§Спортом§Exercise|Yalnız yatır§Только спят§Only sleep|Balıq tutur§Рыбалкой§Fishing|Futbol oynayır§Играют в футбол§Play football
+Astronavtlar kosmosda necə yatır?|Как астронавты спят в космосе?|How do astronauts sleep in space?|Divara bərkidilmiş yataq çantasında§В спальном мешке, закреплённом на стене§In a sleeping bag fixed to a wall|Çarpayıda§В кровати§In a bed|Yerdə§На полу§On the floor|Ayaq üstə§Стоя§Standing up
+Kosmosda sümüklər niyə zəifləyə bilər?|Почему в космосе кости могут слабеть?|Why can bones weaken in space?|Çəkisizlik yükü azaldır§Невесомость снижает нагрузку§Weightlessness reduces the load|Çox işıq§Слишком много света§Too much light|Çox səs§Слишком много шума§Too much noise|Çox su§Слишком много воды§Too much water
+Çəkisizlikdə göz yaşı necə davranır?|Как ведёт себя слеза в невесомости?|How do tears behave in weightlessness?|Gözdə top kimi qalır§Остаётся шариком на глазу§Stay as a ball on the eye|Dərhal axır§Сразу стекает§Run down at once|Buxarlanır§Испаряется§Evaporate|Donur§Замерзает§Freeze
+Skafandrla kosmosa çıxış necə adlanır?|Как называется выход в открытый космос?|What is a spacewalk also called?|EVA (açıq kosmosda iş)§EVA (выход в открытый космос)§EVA (extravehicular activity)|SLS|RTG|DART
+İlk qadın kosmonavt?|Первая женщина-космонавт?|The first woman in space?|Valentina Tereşkova§Валентина Терешкова§Valentina Tereshkova|Sally Rayd§Салли Райд§Sally Ride|Mey Cemison§Мэй Джемисон§Mae Jemison|Krista Makoliff§Криста Маколифф§Christa McAuliffe
+Kosmosa ilk uçan insan kim idi?|Кто был первым человеком в космосе?|Who was the first human in space?|Yuri Qaqarin (1961)§Юрий Гагарин (1961)§Yuri Gagarin (1961)|Alan Şepard§Алан Шепард§Alan Shepard|Nil Armstronq§Нил Армстронг§Neil Armstrong|Baz Oldrin§Базз Олдрин§Buzz Aldrin
+Astronavtlar aylarla yaşadığı stansiya?|Станция, где астронавты живут месяцами?|The station where astronauts live for months?|ISS (Beynəlxalq Kosmik Stansiya)§МКС (Международная космическая станция)§ISS (International Space Station)|Hubble|Voyager|Curiosity
+Astronavtlar kosmosda nə üçün bir qədər boy atır?|Почему астронавты в космосе становятся чуть выше?|Why do astronauts grow slightly taller in space?|Onurğa boşalıb uzanır§Позвоночник расправляется§The spine decompresses|Qidadan§От еды§From food|Soyuqdan§От холода§From the cold|Səsdən§От звука§From sound
+ISS ekipajı gündə neçə günəş çıxışı görür?|Сколько восходов Солнца за сутки видит экипаж МКС?|How many sunrises per day does the ISS crew see?|≈16|1|≈2|≈100
+---
+Günəşə ən yaxın planet?|Ближайшая к Солнцу планета?|The planet closest to the Sun?|Merkuri§Меркурий§Mercury|Venera§Венера§Venus|Yer§Земля§Earth|Mars§Марс§Mars
+Ən böyük planet?|Самая большая планета?|The largest planet?|Yupiter§Юпитер§Jupiter|Saturn§Сатурн§Saturn|Neptun§Нептун§Neptune|Yer§Земля§Earth
+Halqaları ilə məşhur planet?|Планета, известная кольцами?|The planet famous for its rings?|Saturn§Сатурн§Saturn|Mars§Марс§Mars|Merkuri§Меркурий§Mercury|Venera§Венера§Venus
+Ən isti planet?|Самая горячая планета?|The hottest planet?|Venera§Венера§Venus|Merkuri§Меркурий§Mercury|Mars§Марс§Mars|Yupiter§Юпитер§Jupiter
+"Qırmızı planet" adlanan hansıdır?|Какую планету называют «красной»?|Which planet is called the 'Red Planet'?|Mars§Марс§Mars|Venera§Венера§Venus|Uran§Уран§Uranus|Neptun§Нептун§Neptune
+Günəş sistemində neçə planet var?|Сколько планет в Солнечной системе?|How many planets are in the Solar System?|8|9|7|10
+Yupiterin "Böyük Qırmızı Ləkəsi" nədir?|Что такое «Большое красное пятно» Юпитера?|What is Jupiter's 'Great Red Spot'?|Nəhəng uzunömürlü fırtına§Гигантский долгоживущий шторм§A giant long-lived storm|Vulkan§Вулкан§A volcano|Okean§Океан§An ocean|Peyk§Спутник§A moon
+Hansı planet "yan düşərək" fırlanır?|Какая планета вращается «лёжа на боку»?|Which planet rotates tilted 'on its side'?|Uran§Уран§Uranus|Mars§Марс§Mars|Merkuri§Меркурий§Mercury|Yer§Земля§Earth
+Yerdən Günəşə məsafə təxminən?|Расстояние от Земли до Солнца примерно?|The Earth–Sun distance is about?|≈150 mln km§≈150 млн км§≈150 million km|≈15 mln km§≈15 млн км§≈15 million km|≈1,5 mlrd km§≈1,5 млрд км§≈1.5 billion km|≈150 000 km
+Voyager 1 hazırda haradadır?|Где сейчас Voyager 1?|Where is Voyager 1 now?|Ulduzlararası məkanda§В межзвёздном пространстве§In interstellar space|Marsda§На Марсе§On Mars|Ayda§На Луне§On the Moon|Yerə qayıdıb§Вернулся на Землю§Back on Earth
+Venerada atmosfer təzyiqi Yerdən?|Давление атмосферы на Венере по сравнению с Землёй?|Atmospheric pressure on Venus compared with Earth?|≈90 dəfə yüksəkdir§≈ в 90 раз выше§≈90 times higher|Eynidir§Такое же§The same|≈90 dəfə aşağıdır§≈ в 90 раз ниже§≈90 times lower|Yoxdur§Отсутствует§None
+Titan hansı planetin peykidir?|Спутником какой планеты является Титан?|Titan is a moon of which planet?|Saturn§Сатурн§Saturn|Yupiter§Юпитер§Jupiter|Mars§Марс§Mars|Neptun§Нептун§Neptune
+---
+Atmosferdə yanan meteoroid necə adlanır?|Как называют сгорающий в атмосфере метеороид?|What is a meteoroid burning in the atmosphere called?|Meteor (şəhab)§Метеор§Meteor (shooting star)|Planet§Планета§Planet|Ulduz§Звезда§Star|Peyk§Спутник§Satellite
+Yerə çatan meteor parçası necə adlanır?|Как называется фрагмент, достигший поверхности Земли?|What is a fragment that reaches Earth's surface called?|Meteorit§Метеорит§Meteorite|Kometa§Комета§Comet|Asteroid§Астероид§Asteroid|Peyk§Спутник§Satellite
+Asteroid qurşağı hansı planetlər arasındadır?|Между какими планетами находится пояс астероидов?|The asteroid belt lies between which planets?|Mars və Yupiter§Марсом и Юпитером§Mars and Jupiter|Yer və Mars§Землёй и Марсом§Earth and Mars|Saturn və Uran§Сатурном и Ураном§Saturn and Uranus|Venera və Yer§Венерой и Землёй§Venus and Earth
+NASA-nın DART missiyası nəyi sınadı?|Что испытала миссия NASA DART?|What did NASA's DART mission test?|Asteroidin istiqamətini dəyişməyi§Отклонение траектории астероида§Deflecting an asteroid|Marsda su axtarışını§Поиск воды на Марсе§Searching for water on Mars|Ay evi tikməyi§Строительство лунного дома§Building a Moon house|Günəş fırtınasını§Солнечную бурю§A solar storm
+Kometanın quyruğu hansı istiqamətə yönəlir?|Куда направлен хвост кометы?|Which way does a comet's tail point?|Günəşdən əks tərəfə§От Солнца§Away from the Sun|Günəşə doğru§К Солнцу§Toward the Sun|Yerə doğru§К Земле§Toward Earth|Həmişə yuxarı§Всегда вверх§Always up
+Kosmik zibil nədir?|Что такое космический мусор?|What is space debris?|İşdən çıxmış peyk və raket qalıqları§Остатки спутников и ракет§Dead satellites and rocket fragments|Yağış damcıları§Капли дождя§Raindrops|Buludlar§Облака§Clouds|Dəniz duzu§Морская соль§Sea salt
+Perseid meteor yağışı hansı ayda ən parlaqdır?|В каком месяце ярче всего Персеиды?|In which month are the Perseids brightest?|Avqust§Август§August|Fevral§Февраль§February|Dekabr§Декабрь§December|Mart§Март§March
+Zərbə krateri necə yaranır?|Как образуется ударный кратер?|How is an impact crater formed?|Cismin sürətlə toqquşması ilə§Ударом быстрого тела§By a high-speed impact|Küləyin yeməsi ilə§Размывом ветром§By wind erosion|Buzun əriməsi ilə§Таянием льда§By melting ice|Yağışın yuması ilə§Размывом дождём§By rain
+Kosmosda ən böyük təhlükələrdən biri?|Одна из главных опасностей космоса?|One of the biggest dangers in space?|Radiasiya və mikrometeoritlər§Радиация и микрометеориты§Radiation and micrometeoroids|Yağış§Дождь§Rain|Duman§Туман§Fog|Tıxac§Пробки§Traffic jams
+Halley kometası təxminən neçə ildən bir görünür?|Как часто видна комета Галлея?|How often is Halley's Comet visible?|≈76 ildən bir§≈ раз в 76 лет§every ≈76 years|Hər il§Каждый год§Every year|≈7 ildən bir§≈ раз в 7 лет§every ≈7 years|≈700 ildən bir§≈ раз в 700 лет§every ≈700 years
+Yerə yaxın obyektləri (NEO) kim izləyir?|Кто следит за околоземными объектами (NEO)?|Who tracks near-Earth objects (NEOs)?|NASA-nın Planetar Müdafiə İdarəsi§Управление планетарной обороны NASA§NASA's Planetary Defense Office|Hava limanı§Аэропорт§An airport|Mətbəə§Типография§A print shop|Bank§Банк§A bank
+Yerə düşən meteoritlər çox vaxt nədən ibarətdir?|Из чего чаще всего состоят метеориты?|What are meteorites most often made of?|Daş və dəmir-nikeldən§Из камня и железа-никеля§Stone and iron-nickel|Şüşədən§Из стекла§Glass|Plastikdən§Из пластика§Plastic|Taxtadan§Из дерева§Wood
+---
+Mars Yerdən?|Марс по сравнению с Землёй?|Mars compared with Earth?|Daha soyuqdur§Холоднее§Colder|Daha istidir§Горячее§Hotter|Eynidir§Такой же§The same|Okeanlarla örtülüdür§Покрыт океанами§Covered in oceans
+Curiosity roveri Marsa hansı ildə endi?|В каком году Curiosity сел на Марс?|In what year did Curiosity land on Mars?|2012|1997|2021|2004
+Perseverance roveri harada endi?|Где сел марсоход Perseverance?|Where did Perseverance land?|Cezero krateri§Кратер Езеро§Jezero Crater|Olympus Mons|Mare Tranquillitatis|Valles Marineris
+Marsda ilk idarə olunan helikopter?|Первый управляемый вертолёт на Марсе?|The first controlled helicopter on Mars?|Ingenuity|Opportunity|Sojourner|Spirit
+Marsın atmosferi əsasən nədən ibarətdir?|Из чего в основном состоит атмосфера Марса?|What is Mars' atmosphere mostly made of?|Karbon qazı§Углекислого газа§Carbon dioxide|Oksigen§Кислорода§Oxygen|Azot§Азота§Nitrogen|Hidrogen§Водорода§Hydrogen
+Marsda bir gün (sol) nə qədərdir?|Сколько длятся марсианские сутки (сол)?|How long is a Martian day (sol)?|≈24 saat 40 dəq§≈24 ч 40 мин§≈24 h 40 min|≈12 saat§≈12 ч§≈12 h|≈48 saat§≈48 ч§≈48 h|≈7 gün§≈7 суток§≈7 days
+Marsın ən hündür dağı?|Самая высокая гора Марса?|The tallest mountain on Mars?|Olympus Mons§Олимп§Olympus Mons|Everest§Эверест§Everest|Mauna Kea§Мауна-Кеа§Mauna Kea|Fuji§Фудзи§Fuji
+Marsın iki peyki?|Две луны Марса?|Mars' two moons?|Fobos və Deymos§Фобос и Деймос§Phobos and Deimos|Titan və Evropa§Титан и Европа§Titan and Europa|İo və Kallisto§Ио и Каллисто§Io and Callisto|Triton və Xaron§Тритон и Харон§Triton and Charon
+Marsa uçuş təxminən nə qədər çəkir?|Сколько примерно длится полёт к Марсу?|About how long does a trip to Mars take?|≈6–9 ay§≈6–9 месяцев§≈6–9 months|≈6 saat§≈6 часов§≈6 hours|≈1 həftə§≈1 неделю§≈1 week|≈10 il§≈10 лет§≈10 years
+Mars niyə qırmızı görünür?|Почему Марс выглядит красным?|Why does Mars look red?|Dəmir oksidi (pas) tozu§Пыль оксида железа (ржавчина)§Iron oxide (rust) dust|Qırmızı su§Красная вода§Red water|Qırmızı buludlar§Красные облака§Red clouds|Lava§Лава§Lava
+Mars nümunələrini Yerə gətirmək planı necə adlanır?|Как называется план доставки марсианских образцов на Землю?|What is the plan to bring Mars samples to Earth called?|Mars Sample Return|Skylab|Hubble|Apollo
+NASA-nın insanları Aya qaytaran proqramı?|Программа NASA по возвращению людей на Луну?|NASA's program returning humans to the Moon?|Artemis|Mercury|Gemini|Viking`;
+
+const LV=RAW.split("\n---\n");
+const sp=x=>{const p=x.split("§");return p.length>1?p:[x,x,x]};
+const ALL=[];
+function mkQ(p,o){const Q={id:ALL.length,q:[p[o],p[o+1],p[o+2]],o:p.slice(o+3,o+7).map(sp)};ALL.push(Q);return Q}
+const LEVELS=LV.map(b=>b.trim().split("\n").map(l=>mkQ(l.split("|"),0)));LEVELS.forEach((a,k)=>a.forEach(Q=>Q.tp=k));
+const NB=[];
+let LANG="az";try{const l=localStorage.getItem("aybaza_lang");if(["az","ru","en"].includes(l))LANG=l}catch(e){}
+const LI=()=>["az","ru","en"].indexOf(LANG);
+const tr=(k,...a)=>t(k,...a);
+const t=(k,...a)=>{const r=T[k];let s=r?r[LI()]:k;return s.replace(/\{(\d)\}/g,(m,i)=>a[i])};
+const $=id=>document.getElementById(id);
+const shuffle=a=>{a=a.slice();for(let k=a.length-1;k>0;k--){const j=Math.random()*(k+1)|0;[a[k],a[j]]=[a[j],a[k]]}return a};
+const EMO=["🌙","☀️","🫁","⚡","🌱","🚀","👩‍🚀","🪐","☄️","🔴"];
+const ASTRO="\u{1F469}\u200D\u{1F680}";
+const POS=[[70,360],[190,300],[110,190],[240,100],[370,170],[340,310],[480,380],[570,270],[650,160],[690,70]];
+const W=760,H=440,PASS=7,NQ=10;
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+const explain=Q=>Q.why?Q.why[LI()]:t("corr")+": "+Q.o[0][LI()]+".";
+const fresh=()=>({unlocked:1,best:{},coins:0,lamps:1,fifty:1,xp:0,ach:{},gems:0,history:[],pc:0,op:{},mp:{},known:{},custom:[]});
+let S=fresh();
+try{const o=JSON.parse(localStorage.getItem("aybaza2")||"null");if(o)S=Object.assign(S,o);if(!Array.isArray(S.history))S.history=[]}catch(e){}
+const save=()=>{try{localStorage.setItem("aybaza2",JSON.stringify(S))}catch(e){}};
+let tt;function toast(m){const e=$("toast");e.textContent=m;e.hidden=false;clearTimeout(tt);tt=setTimeout(()=>e.hidden=true,2600)}
+function drawHistory(){
+ const host=$("historyList");if(!host)return;const L=LI();
+ const rows=(S.history||[]).filter(h=>h.id!=null&&ALL[h.id]).slice(-60).reverse();
+ host.innerHTML=rows.length?rows.map(h=>{const Q=ALL[h.id];return '<div class="history-item '+(h.ok?'good':'')+'"><b>'+(h.ok?t("hOk"):t("hBad"))+'</b> · '+esc(Q.q[L])+'<small>'+t("hYour")+': '+esc(Q.o[h.ci][L])+'<br>'+t("hRight")+': <b>'+esc(Q.o[0][L])+'</b><br>'+t("hWhy")+': '+esc(explain(Q))+(Q.src?'<br><a target="_blank" rel="noopener" href="'+esc(Q.src)+'">'+t("src")+'</a>':'')+'</small></div>'}).join(''):'<p class="mini">'+t("hEmpty")+'</p>';
+ $("repeatMistakes").disabled=!(S.history||[]).some(h=>!h.ok&&h.id!=null&&ALL[h.id])}
+function logAnswer(Q,oi,ok){if(Q.id==null)return;S.history=S.history||[];S.history.push({id:Q.id,ci:oi,ok,at:Date.now()});if(S.history.length>250)S.history=S.history.slice(-250);save();drawHistory()}
+function drawAch(){const L=LI();$("al").innerHTML=Object.keys(ACH).map(k=>{const a=ACH[k];return'<div class="'+(S.ach[k]?"on":"")+'">'+a[0]+' <b>'+a[1][L]+'</b> <small>'+a[2][L]+'</small></div>'}).join("");$("ac").textContent=Object.keys(S.ach).length+"/"+Object.keys(ACH).length}
+function ach(id){if(S.ach[id])return;S.ach[id]=1;toast(t("achT")+": "+ACH[id][1][LI()]+" "+ACH[id][0]);save();drawAch()}
+const rank=()=>{let r=RANKS[0][0];RANKS.forEach(x=>{if(S.xp>=x[1])r=x[0]});return r[LI()]};
+function inv(){$("cn").textContent="💎 "+S.coins;$("pcn").textContent="🪙 "+t("pcw")+": "+(S.pc||0);$("lp").textContent="💡 "+t("lampW")+": "+S.lamps;$("ff").textContent="🛡️ 50/50: "+S.fifty;$("stars").textContent="🎖️ "+rank()+": "+S.xp+" xp";$("buyL").textContent=t("buyL");$("buyF").textContent=t("buyF");$("buyL").disabled=S.coins<8;$("buyF").disabled=S.coins<5}
+const FLAG={az:'<svg viewBox="0 0 60 40"><rect width="60" height="14" fill="#00b5e2"/><rect y="13" width="60" height="14" fill="#ef3340"/><rect y="26" width="60" height="14" fill="#509e2f"/><circle cx="27" cy="20" r="6.5" fill="#fff"/><circle cx="29" cy="20" r="5.2" fill="#ef3340"/><circle cx="35" cy="20" r="1.8" fill="#fff"/></svg>',ru:'<svg viewBox="0 0 60 40"><rect width="60" height="14" fill="#fff"/><rect y="13" width="60" height="14" fill="#0039a6"/><rect y="26" width="60" height="14" fill="#d52b1e"/></svg>',en:'<svg viewBox="0 0 60 40"><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#c8102e" stroke-width="3"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="13"/><path d="M30 0v40M0 20h60" stroke="#c8102e" stroke-width="8"/></svg>'};
+$("langbar").innerHTML=["az","ru","en"].map(l=>'<button class="langbtn" data-l="'+l+'" aria-label="'+l.toUpperCase()+'">'+FLAG[l]+'<span>'+l.toUpperCase()+'</span></button>').join("");
+$("langbar").onclick=e=>{const b=e.target.closest("button");if(b)setLang(b.dataset.l)};
+function setLang(l){
+ LANG=l;try{localStorage.setItem("aybaza_lang",l)}catch(e){}
+ document.documentElement.lang=l;document.title=t("title");
+ document.querySelectorAll("[data-t]").forEach(e=>e.textContent=t(e.dataset.t));
+ document.querySelectorAll("[data-h]").forEach(e=>e.innerHTML=t(e.dataset.h));
+ document.querySelectorAll(".langbtn").forEach(b=>b.classList.toggle("on",b.dataset.l===l));
+ ln=-2;inv();drawAch();drawHistory();drawMapBar();
+ document.querySelectorAll("[data-p]").forEach(e=>e.placeholder=t(e.dataset.p));
+ if(!$("cards").hidden)cardsRender();aiChips();
+ if(!$("quiz").hidden&&curQ){paint();hud()}
+ if(!$("result").hidden)renderRes()}
+
+/* ---------- Xəritə ---------- */
+const cv=$("cv"),cx=cv.getContext("2d"),keys={},craters=[];
+{const d=window.devicePixelRatio||1;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0)}
+for(let k=0;k<26;k++)craters.push([k*137%W,k*89%H,12+k*7%22]);
+let me={x:72,y:350,f:1,m:0,energy:100},items=[],near=-1,ln=-2,last=0,run=false,scanUntil=0,gameStarted=false,doorReady=false;const GATE={x:650,y:215};
+function spawn(){items=[];while(items.length<8){const x=40+Math.random()*(W-80),y=50+Math.random()*(H-90);if(POS.some(p=>Math.hypot(p[0]-x,p[1]-y)<50))continue;items.push({x,y,t:Math.random()<.18?"🎁":"⭐"})}}
+function pick(it){
+ if(it.t==="⭐"){S.coins++;S.gems++;if(S.gems>=20)ach("gem");toast("⭐ +1 ulduz")}
+ else{const r=Math.random();if(r<.4){S.lamps++;toast(t("gL"))}else if(r<.8){S.fifty++;toast(t("gF"))}else{S.coins+=5;toast(t("g5"))}}
+ save();inv()}
+function loop(t){
+ if(!run)return;const dt=Math.min(.05,(t-last)/1000||0);last=t;
+ const dx=(keys.d?1:0)-(keys.a?1:0),dy=(keys.s?1:0)-(keys.w?1:0);
+ const sprint=false;if(sprint)me.energy=Math.max(0,me.energy-34*dt);else me.energy=Math.min(100,me.energy+19*dt);if(dx||dy){const l=Math.hypot(dx,dy),speed=sprint?245:155;me.x+=dx/l*speed*dt;me.y+=dy/l*speed*dt;if(dx)me.f=dx;me.m+=dt*10}
+ me.x=Math.max(22,Math.min(W-22,me.x));me.y=Math.max(34,Math.min(H-18,me.y));
+ items=items.filter(it=>{if(Math.hypot(it.x-me.x,it.y-me.y)<28){pick(it);return false}return true});
+ near=POS.slice(0,MN()).findIndex(p=>Math.hypot(p[0]-me.x,p[1]-me.y)<43);$("energyFill").style.width=me.energy+"%";$("missionProgress").textContent="📍 "+(near>=0?tr("mNear",near+1):tr("mExpl",Math.min(MN(),UN()-1),MN()));
+ if(near!==ln){ln=near;const nb=$("near");nb.hidden=near<0;if(near>=0){const lock=near+1>UN();nb.disabled=lock;nb.textContent=lock?tr("lockB",UN()):tr("startB",near+1)}}
+ draw(t);requestAnimationFrame(loop)}
+function draw(t){
+ const g=cx.createRadialGradient(W/2,H/2,60,W/2,H/2,520);g.addColorStop(0,THM[0]);g.addColorStop(1,THM[1]);cx.fillStyle=g;cx.fillRect(0,0,W,H);
+ craters.forEach(c=>{cx.beginPath();cx.arc(c[0],c[1],c[2],0,7);cx.fillStyle="rgba(20,20,60,.25)";cx.fill();cx.lineWidth=3;cx.strokeStyle="rgba(255,255,255,.12)";cx.stroke()});
+ /* Açıq Ay bazası: eniş meydançası, yollar, modullar və növbəti qapı */
+ cx.fillStyle="rgba(76,201,255,.10)";cx.fillRect(28,285,210,105);
+ cx.fillStyle="#59618d";cx.fillRect(38,300,190,72);cx.fillStyle="#aab0e6";cx.fillRect(52,312,162,8);
+ cx.fillStyle="#242b62";cx.fillRect(270,70,170,105);cx.strokeStyle="#4cc9ff";cx.lineWidth=3;cx.strokeRect(270,70,170,105);
+ cx.fillStyle="#ffd84d";cx.font="600 15px Fredoka,sans-serif";cx.textAlign="center";cx.fillText(tr("cMod"),355,95);
+ cx.fillStyle="#242b62";cx.fillRect(505,150,170,145);cx.strokeStyle="#8d8cf5";cx.strokeRect(505,150,170,145);
+ cx.fillStyle="#dce8ff";cx.font="600 14px Fredoka,sans-serif";cx.fillText(tr("cLock"),590,175);
+ cx.font="48px sans-serif";cx.fillText("🚪",GATE.x,GATE.y+12);
+ cx.beginPath();cx.arc(GATE.x,GATE.y,42+4*Math.sin(t/200),0,Math.PI*2);cx.strokeStyle="#ffd84d";cx.lineWidth=3;cx.stroke();
+ cx.fillStyle="#ffd84d";cx.font="600 13px Fredoka,sans-serif";cx.fillText(tr("cGate"),GATE.x,GATE.y+55);
+ cx.textAlign="center";cx.textBaseline="middle";
+ /* Kəşfiyyat nişanları */
+ POS.forEach((p,k)=>{cx.beginPath();cx.arc(p[0],p[1],38,0,Math.PI*2);cx.strokeStyle="rgba(120,210,255,.10)";cx.lineWidth=1;cx.stroke()});
+ if(scanUntil>t)items.forEach(it=>{cx.font="24px sans-serif";cx.shadowColor=it.t==="🎁"?"#ffd84d":"#fff2a8";cx.shadowBlur=scanUntil>t?24:8;cx.fillText(it.t,it.x,it.y+3*Math.sin(t/250+it.x));cx.shadowBlur=0});
+ if(scanUntil>t){cx.beginPath();cx.arc(me.x,me.y,42+((t%500)/500)*100,0,Math.PI*2);cx.strokeStyle="rgba(76,201,255,.75)";cx.lineWidth=4;cx.stroke()}
+ cx.fillStyle="rgba(0,0,0,.3)";cx.beginPath();cx.ellipse(me.x,me.y+18,16,6,0,0,7);cx.fill();
+ cx.save();cx.translate(me.x,me.y-Math.abs(Math.sin(me.m))*4);cx.scale(me.f<0?-1:1,1);cx.font="36px sans-serif";cx.fillText(ASTRO,0,0);cx.restore()}
+function view(v){
+ ["titleScreen","map","quiz","result","cards","ai","catalog"].forEach(x=>$(x).hidden=x!==v);scrollTo(0,0);
+ const was=run;run=v==="map";for(const k in keys)keys[k]=0;if(v==="titleScreen")drawHistory();
+ if(run){ln=-2;inv();if(!was){last=performance.now();requestAnimationFrame(loop)}}}
+const enter=()=>{
+ if(near<0||near+1>UN())return;CM==="moon"?start(near+1):startPM(CM,near+1);return;
+ if(!gameStarted){gameStarted=true;start(1);return}
+ if(S.unlocked>cur){start(S.unlocked);return}
+};
+
+/* ---------- Planet xəritələri ---------- */
+const PL={
+mercury:{n:["Merkuri","Меркурий","Mercury"],e:"🌑",c:10,th:["#9b9288","#47423d","#c8c0b6"],d:"4 879",r:"1 408",y:88,t:"167",s:58,g:38,v:47,l:3,a:["ekzosfer (çox nazik)","экзосфера (очень тонкая)","exosphere (very thin)"],m:"MESSENGER"},
+venus:{n:["Venera","Венера","Venus"],e:"🟠",c:14,th:["#e0a948","#7a3f14","#f0cf88"],d:"12 104",r:"5 832",y:225,t:"464",s:108,g:90,v:35,l:6,a:"CO₂",m:"Magellan"},
+mars:{n:["Mars","Марс","Mars"],e:"🔴",c:18,th:["#c8583a","#5e2415","#e8a083"],d:"6 792",r:25,y:687,t:"−65",s:228,g:38,v:24,l:13,a:"CO₂",m:"Perseverance"},
+jupiter:{n:["Yupiter","Юпитер","Jupiter"],e:"🟤",c:24,th:["#d9a066","#6d4529","#f0cfa0"],d:"142 984",r:10,y:"4 333",t:"−110",s:779,g:253,v:13,l:43,a:"H₂ + He",m:"Juno"},
+saturn:{n:["Saturn","Сатурн","Saturn"],e:"🪐",c:30,th:["#e3cb8c","#76603a","#f2e3b8"],d:"120 536",r:11,y:"10 756",t:"−140",s:"1 434",g:107,v:10,l:80,a:"H₂ + He",m:"Cassini"},
+uranus:{n:["Uran","Уран","Uranus"],e:"🧊",c:36,th:["#8fdde3","#2b6c78","#c5f0f3"],d:"51 118",r:17,y:"30 687",t:"−195",s:"2 871",g:89,v:7,l:160,a:"H₂ + He + CH₄"},
+neptune:{n:["Neptun","Нептун","Neptune"],e:"🔵",c:42,th:["#4a76df","#14246b","#9fb8f5"],d:"49 528",r:16,y:"60 190",t:"−200",s:"4 495",g:114,v:5,l:250,a:"H₂ + He + CH₄"}};
+for(const k in PL)PL[k].u="https://science.nasa.gov/"+k+"/";
+const EA={n:["Yer","Земля","Earth"],d:"12 756",y:365,t:"15",s:150,g:100,v:30,l:8};
+const PA=Object.values(PL).concat(EA),NAMES=PA.map(o=>o.n);
+const MAPS={moon:{n:["Ay","Луна","Moon"],e:"🌙",c:0,th:["#6b6a96","#35345f","#c9c6e0"]},mix:{n:["MİX","MIX","MIX"],e:"🎲",c:0,th:["#6a5aa8","#2a1f55","#cbbdf0"]},...PL};
+const U={d:["km","км","km"],r:["saat","ч","h"],y:["gün","сут.","days"],t:["°C","°C","°C"],s:["mln km","млн км","million km"],g:["%","%","%"],v:["km/san","км/с","km/s"],l:["dəq","мин","min"]};
+const fm=(k,x)=>U[k].map(u=>"≈"+x+" "+u);
+const tv=(o,k)=>{const x=o[k];return Array.isArray(x)?x:k==="a"||k==="m"?[x,x,x]:fm(k,x)};
+const TQ={d:"{P}: təxmini diametr?|{P}: примерный диаметр?|{P}: approximate diameter?",
+r:"{P}: öz oxu ətrafında bir dövrə (sutka)?|{P}: один оборот вокруг оси (сутки)?|{P}: one spin on its axis (a day)?",
+y:"{P}: Günəş ətrafında bir dövrə (il)?|{P}: один оборот вокруг Солнца (год)?|{P}: one orbit around the Sun (a year)?",
+t:"{P}: orta temperatur təxminən?|{P}: средняя температура примерно?|{P}: average temperature, roughly?",
+s:"{P}: Günəşdən orta məsafə?|{P}: среднее расстояние до Солнца?|{P}: average distance from the Sun?",
+g:"{P}: cazibə Yerinkinin neçə faizidir?|{P}: сила тяжести в % от земной?|{P}: gravity as a % of Earth's?",
+v:"{P}: Günəş ətrafında orta orbital sürət?|{P}: средняя орбитальная скорость вокруг Солнца?|{P}: average orbital speed around the Sun?",
+l:"{P}: Günəş işığı bura neçə dəqiqəyə çatır?|{P}: за сколько минут свет Солнца доходит сюда?|{P}: how many minutes does sunlight take to arrive?",
+a:"{P}: atmosferin əsas tərkibi?|{P}: основной состав атмосферы?|{P}: main composition of the atmosphere?",
+m:"{P}: məhz bu planetə həsr olunmuş NASA missiyası?|{P}: миссия NASA, посвящённая именно этой планете?|{P}: a NASA mission dedicated to this planet?"};
+const TI={d:"Diametri {V} olan planet?|Планета с диаметром {V}?|The planet with a diameter of {V}?",
+y:"Hansı planetdə il {V} davam edir?|На какой планете год длится {V}?|On which planet does a year last {V}?",
+t:"Hansı planetin orta temperaturu {V}-dir?|У какой планеты средняя температура {V}?|Which planet averages {V}?",
+s:"Hansı planet Günəşdən orta {V} məsafədədir?|Какая планета в среднем в {V} от Солнца?|Which planet averages {V} from the Sun?"};
+const KS=["d","r","y","t","s","g","v","l","a","m"],IK=["d","y","t","s"];
+function gen(p,k,inv){const P=PL[p];
+ if(inv){const v=fm(k,P[k]);return{id:null,q:TI[k].split("|").map((x,i)=>x.replace("{V}",v[i])),o:[P.n,...shuffle(NAMES.filter(n=>n!==P.n)).slice(0,3)],src:P.u}}
+ const c=tv(P,k),pool=[...new Map(PA.filter(o=>o!==P&&o[k]!=null).map(o=>[tv(o,k)[0],tv(o,k)])).values()].filter(v=>v[0]!==c[0]);
+ return{id:null,q:TQ[k].split("|").map((x,i)=>x.replace("{P}",P.n[i])),o:[c,...shuffle(pool).slice(0,3)],src:P.u}}
+function mixQs(){
+ const g=shuffle(Object.keys(PL)).slice(0,4).map(p=>{const k=shuffle(KS.filter(x=>PL[p][x]!=null))[0];return gen(p,k,IK.includes(k)&&Math.random()<.5)});
+ return shuffle([...g,...shuffle(LEVELS.flat()).slice(0,8)]).map(mk)}
+let CM="moon",THM=MAPS.moon.th,PM=null;
+const MN=(m=CM)=>m==="moon"?10:m==="mix"?1:3;
+const MP=id=>S.mp[id]||(S.mp[id]={u:1,best:{}});
+const UN=()=>CM==="moon"?S.unlocked:CM==="mix"?2:MP(CM).u;
+const pmHead=()=>MAPS[PM].e+" "+MAPS[PM].n[LI()]+(PM==="mix"?"":" · "+t("lvl")+" "+cur)+"  ✨ "+score+" "+t("pts");
+const again=()=>PM?startPM(PM,cur):start(cur);
+function startPM(m,d){clearTimeout(timer);PM=m;cur=d;reviewMode=false;nasaMode=false;
+ qs=m==="mix"?mixQs():shuffle(KS.filter(k=>PL[m][k]!=null)).slice(0,8).map(k=>mk(gen(m,k,IK.includes(k)&&Math.random()<.5)));
+ begin(m==="mix"?9:Math.ceil(qs.length*.75))}
+function drawMapBar(){const L=LI();$("mapbar").innerHTML=Object.keys(MAPS).map(id=>{const m=MAPS[id],open=!m.c||S.op[id];return'<button class="mp'+(id===CM?" on":"")+'" data-m="'+id+'">'+m.e+" "+m.n[L]+(open?"":" 🔒"+m.c+"🪙")+"</button>"}).join("")}
+function setMap(id){CM=id;THM=MAPS[id].th;document.documentElement.style.setProperty("--gr",THM[2]);me.x=72;me.y=350;ln=-2;spawn();drawMapBar();inv()}
+function pickMap(id){const m=MAPS[id];if(m.c&&!S.op[id]){if((S.pc||0)<m.c){toast(t("needPc",m.n[LI()],m.c,S.pc||0));return}S.pc-=m.c;S.op[id]=1;save();toast(t("mapOpen",m.n[LI()]))}setMap(id)}
+$("mapbar").onclick=e=>{const b=e.target.closest("button");if(b)pickMap(b.dataset.m)};
+
+/* ---------- Kviz ---------- */
+let cur,qs,qi,right,wrong,need,score,locked,over,timer,res=[],streak=0,f5=false,lives=3,lampsThisRun=0,curQ=null,RS=null,reviewMode=false,nasaMode=false;
+const mk=Q=>({Q,ord:shuffle([0,1,2,3])});
+function begin(n){qi=0;right=0;wrong=0;lives=3;lampsThisRun=0;need=n;score=0;over=false;res=[];view("quiz");show()}
+function start(d){clearTimeout(timer);PM=null;cur=d;reviewMode=false;nasaMode=false;qs=shuffle(LEVELS[d-1]).slice(0,NQ).map(mk);begin(PASS)}
+function startMistakeReview(){
+ const ids=[...new Set((S.history||[]).filter(h=>!h.ok&&h.id!=null&&ALL[h.id]).map(h=>h.id))];
+ if(!ids.length){toast(t("noMist"));return}
+ clearTimeout(timer);PM=null;reviewMode=true;nasaMode=false;cur=1;qs=shuffle(ids).map(i=>mk(ALL[i]));begin(Math.ceil(qs.length*.7))}
+function drawSlots(){$("slots").innerHTML=res.concat(Array(Math.max(0,qs.length-qi)).fill(0)).map(v=>'<i class="'+["","g","x","l"][v]+'"></i>').join("")}
+function hud(){
+ $("hearts").textContent="❤️".repeat(Math.max(0,lives))+"🖤".repeat(Math.max(0,3-lives));
+ $("mq").textContent=t("qN",Math.min(qi+1,qs.length),qs.length);$("mr").textContent=t("okN",right,need);
+ $("mL").textContent="💡 "+t("series")+": "+(streak%5)+"/5";$("mF").textContent="🛡️ "+t("series")+": "+(streak%3)+"/3";
+ $("bL").textContent="💡 "+t("lampW")+" ×"+S.lamps+" (L)";$("bF").textContent="🛡️ 50/50 ×"+S.fifty+" (F)";
+ $("bL").disabled=locked||!S.lamps||qs.length<2;$("bF").disabled=locked||!S.fifty||f5;
+ $("track").style.setProperty("--p",Math.min(1,right/need));drawSlots()}
+function paint(){
+ if(!curQ)return;
+ $("head").textContent=reviewMode?t("hRev"):nasaMode?t("hNasa"):PM?pmHead():EMO[cur-1]+" "+t("lvl")+" "+cur+": "+DT[cur-1][LI()]+"  ✨ "+score+" "+t("pts");
+ $("q").textContent=curQ.Q.q[LI()];
+ document.querySelectorAll("#opts .ans").forEach(b=>b.lastChild.textContent=curQ.Q.o[b.dataset.i][LI()]);
+ if(!locked)$("storyText").textContent=t("room",qi+1);else $("go").textContent=$("go").dataset.over?t("toRes"):t("nextRoom")}
+function show(){
+ curQ=qs[qi];locked=false;f5=false;$("doorbox").hidden=true;$("msg").textContent="";$("go").hidden=true;
+ const box=$("opts");box.innerHTML="";
+ curQ.ord.forEach((oi,k)=>{const b=document.createElement("button"),l=document.createElement("span"),tx=document.createElement("span");
+  b.className="ans c"+k;l.className="l";l.textContent="ABCD"[k];tx.className="tx";b.dataset.i=oi;b.append(l,tx);b.onclick=()=>answer(b,oi);box.appendChild(b)});
+ paint();hud()}
+function answer(b,oi){
+ if(locked)return;locked=true;const Q=curQ.Q,ok=oi===0;let m;const G=GOOD[LI()];
+ logAnswer(Q,oi,ok);
+ document.querySelectorAll("#opts .ans").forEach(x=>{x.disabled=true;if(x.dataset.i==="0")x.classList.add("ok")});
+ if(ok){
+  right++;streak++;score+=10+Math.min(streak,5)*2;m=(streak>=3?t("strk",streak):"")+G[Math.random()*G.length|0];
+  if(streak===5)ach("s5");
+  if(streak%5===0){S.lamps++;m+=t("lampP")}
+  if(streak%3===0){S.fifty++;m+=t("fiftyP")}
+  $("doorbox").hidden=false;$("doorHint").textContent="💫 "+t("didu")+" "+FACTS[Math.random()*FACTS.length|0][LI()];
+  $("storyText").textContent=t("doorOpen");qi++;over=right+qs.length-qi<need||qi>=qs.length;save()
+ }else{
+  wrong++;lives=Math.max(0,lives-1);streak=0;b.classList.add("bad");m=t("wrongAns")+Q.o[0][LI()];meteor();
+  $("storyText").textContent=t("warn");qi++;over=lives<=0||right+qs.length-qi<need||qi>=qs.length}
+ $("msg").textContent=m;
+ if(!ok){const ex=document.createElement("div");ex.className="explain";ex.innerHTML="<b>💡 "+t("expl")+":</b> "+esc(explain(Q))+(Q.src?'<br><a target="_blank" rel="noopener" href="'+esc(Q.src)+'">'+t("src")+'</a>':"");$("msg").appendChild(ex)}
+ res.push(ok?1:2);hud();
+ const g=$("go");g.dataset.over=(!ok&&over)?"1":"";g.textContent=g.dataset.over?t("toRes"):t("nextRoom");g.hidden=false;if(!ok)g.focus()}
+function next(){clearTimeout(timer);over?finish():show()}
+function meteor(){
+ const m=$("mt"),tr=$("track"),a=$("astro");m.hidden=false;m.style.animation="none";void m.offsetWidth;m.style.animation="";
+ a.textContent="😵";tr.classList.add("hit");setTimeout(()=>{m.hidden=true;tr.classList.remove("hit");a.textContent=ASTRO},900)}
+function lamp(){
+ if(locked||!S.lamps||qs.length<1)return;
+ S.lamps--;lampsThisRun++;
+ if(lampsThisRun===2){lives=Math.max(0,lives-1);toast(t("lamp2"))}
+ qs.splice(qi,1);need=Math.max(0,need-1);res.push(3);save();ach("lamp");hud();
+ if(lives<=0||qi>=qs.length){over=true;finish()}else show()}
+function fifty(){
+ if(locked||!S.fifty||f5)return;
+ const w=shuffle([...document.querySelectorAll("#opts .ans")].filter(b=>b.dataset.i!=="0"));
+ S.fifty--;f5=true;w.slice(0,2).forEach(b=>{b.disabled=true;b.style.opacity=.18;b.style.filter="grayscale(1)"});save();ach("f50");$("msg").textContent=t("f50msg");hud()}
+function finish(){
+ const pass=right>=need&&lives>0,s=!pass?0:wrong===0?3:wrong<=2?2:1,special=reviewMode||nasaMode,first=!special&&!PM&&!(S.best[cur]>=1);
+ let pc=0;if(pass&&PM){pc=PM==="mix"?4+2*s:s;const M=MP(PM);M.best[cur]=Math.max(M.best[cur]||0,s);if(PM!=="mix"&&cur===M.u&&M.u<=MN(PM))M.u++;if(s===3)ach("perf")}
+ if(pass&&!special&&!PM){pc=s;S.best[cur]=Math.max(S.best[cur]||0,s);if(first)S.coins+=5;if(cur===S.unlocked&&S.unlocked<10)S.unlocked++;
+  if(cur===1)ach("first");if(cur===10)ach("all");if(s===3)ach("perf")}
+ S.xp+=score;S.pc=(S.pc||0)+pc;save();spawn();RS={pass,s,first,right,wrong,need,score,cur,special,pc,rev:reviewMode};view("result");renderRes();
+ const n=$("rNext"),m=$("rMap"),go=()=>{me.x=72;me.y=350;ln=-2;view("map")};
+ n.onclick=special?()=>view("titleScreen"):(pass?go:again);
+ m.onclick=special?startMistakeReview:(pass?again:go);
+ if(pass)confetti()}
+function renderRes(){
+ if(!RS)return;const {pass,s,first,right,wrong,need,score,cur,special,pc,rev}=RS;
+ $("rEmoji").textContent=pass?(cur===10&&!special?"🏆":"🎉"):"🛰️";
+ $("rTitle").textContent=special?(pass?(rev?t("revWin"):t("nasaWin")):(rev?t("revLose"):t("nasaLose"))):(pass?(cur===10?t("cmdWin"):t("lvWin",cur)):t("lose"));
+ $("rText").textContent=pass?t("rWin",right,score)+(first?", +5 💎":"")+(pc?", +"+pc+" 🪙":""):t("rLose",right,wrong,need,score);
+ $("rStars").textContent="★".repeat(s)+"☆".repeat(3-s);
+ $("rNext").textContent=special?t("toHist"):(pass?t("toMapC"):t("retry"));
+ $("rMap").textContent=special?t("repeat"):(pass?t("replay"):t("toMap"))}
+function confetti(){
+ const c=document.createElement("div"),col=["#ffd84d","#3ef2b0","#ff5fa2","#4cc9ff","#ff9f45"];c.className="conf";
+ for(let k=0;k<40;k++){const s=document.createElement("i");
+  s.style.cssText="left:"+Math.random()*100+"%;background:"+col[k%5]+";animation-delay:"+Math.random()*.6+"s;animation-duration:"+(1.8+Math.random()*1.4)+"s";c.appendChild(s)}
+ document.body.appendChild(c);setTimeout(()=>c.remove(),3800)}
+
+/* ---------- NASA Haqqda Öyrən: əzbər kartları ---------- */
+const CARDS=`NASA nə deməkdir?§NASA — что означает эта аббревиатура?§What does NASA stand for?|Milli Aeronavtika və Kosmos İdarəsi (ABŞ)§Национальное управление по аэронавтике и исследованию космического пространства (США)§National Aeronautics and Space Administration (USA)
+NASA hansı ildə yaradılıb?§В каком году создано NASA?§In what year was NASA created?|1958§1958§1958
+İnsanın Aya ilk enişi hansı missiya ilə oldu?§Какая миссия впервые высадила людей на Луну?§Which mission made the first crewed Moon landing?|Apollo 11 (20 iyul 1969)§Apollo 11 (20 июля 1969)§Apollo 11 (20 July 1969)
+Ayda ilk addımı kim atdı?§Кто первым ступил на Луну?§Who was first to step on the Moon?|Nil Armstronq§Нил Армстронг§Neil Armstrong
+Apollo 11 ekipajının üç üzvü kimdir?§Кто три члена экипажа Apollo 11?§Who were the three Apollo 11 crew members?|Armstronq, Oldrin, Kollins§Армстронг, Олдрин, Коллинз§Armstrong, Aldrin, Collins
+Ayda gəzən son missiya hansıdır?§Какая миссия стала последней пилотируемой лунной?§Which was the last crewed Moon landing mission?|Apollo 17 (1972)§Apollo 17 (1972)§Apollo 17 (1972)
+Aya neçə insan ayaq basıb?§Сколько людей побывало на поверхности Луны?§How many people have walked on the Moon?|12 nəfər (1969–1972)§12 человек (1969–1972)§12 people (1969–1972)
+ABŞ-ın ilk insanlı kosmik proqramı?§Первая пилотируемая программа США?§America's first human spaceflight program?|Project Mercury§Project Mercury§Project Mercury
+ABŞ-ın kosmosa ilk uçan astronavtı kimdir?§Кто первый американец в космосе?§Who was the first American in space?|Alan Şepard (1961)§Алан Шепард (1961)§Alan Shepard (1961)
+Yer orbitinə çıxan ilk amerikalı kimdir?§Кто первый американец на орбите Земли?§Who was the first American to orbit Earth?|Con Qlenn (1962)§Джон Гленн (1962)§John Glenn (1962)
+ABŞ-ın ilk qadın astronavtı kimdir?§Первая женщина-астронавт США?§America's first woman in space?|Sally Rayd (1983)§Салли Райд (1983)§Sally Ride (1983)
+Gemini proqramı nə üçün lazım idi?§Для чего нужна была программа Gemini?§What was the Gemini program for?|Aya uçuş üçün lazım olan texnikaları sınamaq§Отработать приёмы для полёта на Луну§Testing the techniques needed to fly to the Moon
+Apollo 13-də nə baş verdi?§Что произошло на Apollo 13?§What happened on Apollo 13?|Oksigen çəni zədələndi, ekipaj sağ qayıtdı (1970)§Повредился кислородный бак, экипаж вернулся живым (1970)§An oxygen tank failed and the crew returned safely (1970)
+«Earthrise» şəkli hansı missiyada çəkilib?§В какой миссии сделан снимок «Восход Земли»?§Which mission took the “Earthrise” photo?|Apollo 8 (1968)§Apollo 8 (1968)§Apollo 8 (1968)
+ABŞ-ın ilk kosmik stansiyası hansıdır?§Первая космическая станция США?§America's first space station?|Skylab (1973)§Skylab (1973)§Skylab (1973)
+Apollo–Soyuz birgə uçuşu nə vaxt oldu?§Когда состоялся совместный полёт «Союз—Аполлон»?§When did the Apollo–Soyuz joint flight take place?|1975§1975§1975
+Space Shuttle proqramı nə vaxt işlədi?§Когда работала программа Space Shuttle?§When did the Space Shuttle program operate?|1981–2011§1981–2011§1981–2011
+Hubble teleskopu nə vaxt orbitə çıxdı?§Когда Hubble вышел на орбиту?§When did Hubble reach orbit?|1990-cı il§1990 год§1990
+Chandra teleskopu hansı şüalarda müşahidə edir?§В каких лучах наблюдает телескоп Chandra?§Which rays does the Chandra telescope observe?|Rentgen şüaları§Рентгеновских§X-rays
+James Webb nə vaxt buraxıldı və hansı işıqda müşahidə edir?§Когда запущен «Джеймс Уэбб» и в каком свете наблюдает?§When was James Webb launched and what light does it see?|25 dekabr 2021; infraqırmızı işıq§25 декабря 2021; инфракрасный свет§25 December 2021; infrared light
+Voyager zondları nə vaxt buraxılıb?§Когда запущены зонды Voyager?§When were the Voyager probes launched?|1977§1977§1977
+ISS-in modullarının orbitdə birləşdirilməsi hansı ildə başladı?§В каком году начали собирать МКС на орбите?§In which year did ISS assembly in orbit begin?|1998§1998§1998
+Viking 1 Marsa nə vaxt endi?§Когда Viking 1 сел на Марс?§When did Viking 1 land on Mars?|1976§1976§1976
+Marsda ilk rover (1997) hansıdır?§Первый марсоход (1997)?§The first Mars rover (1997)?|Sojourner (Mars Pathfinder)§Sojourner (Mars Pathfinder)§Sojourner (Mars Pathfinder)
+Curiosity roveri Marsa nə vaxt endi?§Когда Curiosity сел на Марс?§When did Curiosity land on Mars?|2012 (Geyl krateri)§2012 (кратер Гейла)§2012 (Gale Crater)
+Perseverance roveri harada endi?§Где сел Perseverance?§Where did Perseverance land?|Cezero krateri (2021)§Кратер Езеро (2021)§Jezero Crater (2021)
+Marsda uçan ilk helikopter hansıdır?§Первый вертолёт на Марсе?§The first helicopter on Mars?|Ingenuity§Ingenuity§Ingenuity
+Artemis proqramının məqsədi nədir?§Цель программы Artemis?§What is the goal of the Artemis program?|İnsanları Aya qaytarmaq§Вернуть людей на Луну§Return humans to the Moon
+Artemis adı haradan gəlir?§Откуда название Artemis?§Where does the name Artemis come from?|Yunan mifologiyasında Apollonun əkiz bacısı§Сестра-близнец Аполлона в греческой мифологии§Apollo's twin sister in Greek mythology
+Artemis üçün NASA-nın raketi və gəmisi?§Ракета и корабль NASA для Artemis?§NASA's rocket and spacecraft for Artemis?|SLS raketi və Orion gəmisi§Ракета SLS и корабль Orion§SLS rocket and Orion spacecraft
+Artemis I nə vaxt uçdu?§Когда состоялся полёт Artemis I?§When did Artemis I fly?|2022 (ekipajsız Ay ətrafı uçuş)§2022 (беспилотный облёт Луны)§2022 (uncrewed flight around the Moon)
+Parker Solar Probe nəyi öyrənir?§Что изучает Parker Solar Probe?§What does Parker Solar Probe study?|Günəşin atmosferini (tacı)§Атмосферу (корону) Солнца§The Sun's atmosphere (corona)
+DART missiyası nəyi sınadı?§Что проверила миссия DART?§What did the DART mission test?|Asteroidin yolunu dəyişməyi (2022)§Отклонение астероида (2022)§Deflecting an asteroid (2022)
+Cassini zondu hansı planeti tədqiq etdi?§Какую планету исследовал зонд Cassini?§Which planet did the Cassini probe explore?|Saturnu§Сатурн§Saturn
+New Horizons hansı cırtdan planetə çatdı?§До какой карликовой планеты долетел New Horizons?§Which dwarf planet did New Horizons reach?|Plutona (2015)§Плутона (2015)§Pluto (2015)
+Juno missiyası hansı planeti öyrənir?§Какую планету изучает миссия Juno?§Which planet does the Juno mission study?|Yupiteri§Юпитер§Jupiter
+Kennedy Kosmik Mərkəzi harada yerləşir?§Где находится Космический центр Кеннеди?§Where is the Kennedy Space Center?|Florida, ABŞ§Флорида, США§Florida, USA
+Missiya İdarəetmə Mərkəzi harada yerləşir?§Где находится Центр управления полётами NASA?§Where is NASA's Mission Control?|Hyuston, Texas (Johnson Space Center)§Хьюстон, Техас (Космический центр Джонсона)§Houston, Texas (Johnson Space Center)
+Ketrin Conson kim idi?§Кто такая Кэтрин Джонсон?§Who was Katherine Johnson?|NASA-nın riyaziyyatçısı: uçuş yollarını və orbitləri hesablayırdı§Математик NASA: рассчитывала траектории полётов и орбиты§A NASA mathematician who calculated flight paths and orbits`.split("\n").map((l,i)=>{const p=l.split("|");return{id:"n"+i,q:p[0].split("§"),a:p[1].split("§"),own:false}});
+let BACKTO="titleScreen";
+const CD={list:[],i:0,shown:false,shuf:false,only:false,ord:null};
+S.known=S.known||{};S.custom=S.custom||[];
+const allCards=()=>CARDS.concat((S.custom||[]).map(c=>({id:"c"+c.u,q:[c.q,c.q,c.q],a:[c.a,c.a,c.a],own:true,u:c.u})));
+function cardsBuild(){
+ let l=allCards();if(CD.only)l=l.filter(c=>!S.known[c.id]);
+ if(CD.ord){const pos={};CD.ord.forEach((id,k)=>pos[id]=k);l.sort((a,b)=>(pos[a.id]??9999)-(pos[b.id]??9999))}
+ CD.list=l}
+function cardsRender(){
+ const L=LI(),all=allCards(),kn=all.filter(c=>S.known[c.id]).length;
+ $("cProg").textContent="🧠 "+t("cardProg",kn,all.length);
+ $("cShuf").textContent=CD.shuf?t("order"):t("shuf");$("cOnly").textContent=(CD.only?"☑️ ":"☐ ")+t("onlyNew");
+ const d=CD.list,has=d.length>0;
+ ["cPrev","cNext","cFlip","cKnow","cUnk"].forEach(id=>$(id).disabled=!has);
+ if(!has){$("cNum").textContent="";$("cKnownMark").textContent="";$("cLabel").textContent="";$("cText").textContent=t("allDone");$("cHint").textContent="";$("flash").classList.remove("back");$("cFlip").textContent=t("flip");$("cDel").hidden=true;return}
+ CD.i=Math.max(0,Math.min(CD.i,d.length-1));const c=d[CD.i];
+ $("cNum").textContent=t("cardN",CD.i+1,d.length);$("cKnownMark").textContent=S.known[c.id]?"✅":"";
+ $("cLabel").textContent=CD.shown?"✅ "+t("cardA"):"❓ "+t("cardQ");
+ $("cText").textContent=CD.shown?c.a[L]:c.q[L];
+ $("cHint").textContent=CD.shown?"❓ "+c.q[L]:t("tapHint");
+ $("flash").classList.toggle("back",CD.shown);$("cFlip").textContent=CD.shown?t("flipBack"):t("flip");$("cDel").hidden=!c.own}
+function cardsGo(d){if(!CD.list.length)return;CD.i=(CD.i+d+CD.list.length)%CD.list.length;CD.shown=false;cardsRender()}
+function cardsFlip(){if(!CD.list.length)return;CD.shown=!CD.shown;cardsRender()}
+function cardsMark(ok){
+ const c=CD.list[CD.i];if(!c)return;
+ if(ok){S.known[c.id]=1;save();if(allCards().every(x=>S.known[x.id])){toast(t("allDone"));confetti()}
+  if(CD.only){cardsBuild();CD.shown=false;cardsRender()}else cardsGo(1)}
+ else{delete S.known[c.id];save();cardsGo(1)}}
+function openCards(){BACKTO=$("titleScreen").hidden?"map":"titleScreen";CD.i=0;CD.shown=false;cardsBuild();view("cards");cardsRender()}
+$("cBack").onclick=()=>view(BACKTO);$("aBack").onclick=()=>view(BACKTO);
+$("cPrev").onclick=()=>cardsGo(-1);$("cNext").onclick=()=>cardsGo(1);$("cFlip").onclick=cardsFlip;$("flash").onclick=cardsFlip;
+$("cKnow").onclick=()=>cardsMark(true);$("cUnk").onclick=()=>cardsMark(false);
+$("cShuf").onclick=()=>{CD.shuf=!CD.shuf;CD.ord=CD.shuf?shuffle(allCards().map(c=>c.id)):null;CD.i=0;CD.shown=false;cardsBuild();cardsRender()};
+$("cOnly").onclick=()=>{CD.only=!CD.only;CD.i=0;CD.shown=false;cardsBuild();cardsRender()};
+$("cAdd").onclick=()=>{
+ const q=$("ownQ").value.trim(),a=$("ownA").value.trim();if(!q||!a){toast(t("cFill"));return}
+ const u=Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+ S.custom.push({q:q.slice(0,200),a:a.slice(0,300),u});save();AIDX=null;$("ownQ").value="";$("ownA").value="";
+ CD.ord=null;CD.shuf=false;cardsBuild();const k=CD.list.findIndex(c=>c.id==="c"+u);CD.i=k>=0?k:0;CD.shown=false;cardsRender();toast(t("cAdded"))};
+$("ownA").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();$("cAdd").click()}});
+$("cDel").onclick=()=>{const c=CD.list[CD.i];if(!c||!c.own)return;
+ S.custom=S.custom.filter(x=>x.u!==c.u);delete S.known[c.id];CD.ord=null;CD.shuf=false;save();AIDX=null;cardsBuild();CD.shown=false;cardsRender()};
+addEventListener("keydown",e=>{
+ if($("cards").hidden)return;const tg=e.target&&e.target.tagName;if(tg==="INPUT"||tg==="TEXTAREA")return;
+ if(e.key==="ArrowRight"){cardsGo(1);e.preventDefault()}else if(e.key==="ArrowLeft"){cardsGo(-1);e.preventDefault()}
+ else if(e.key==="ArrowUp"||e.key==="ArrowDown"){cardsFlip();e.preventDefault()}});
+
+/* ---------- AI köməkçi (cihazda işləyən bilik bazası əsaslı müəllim) ---------- */
+const norm=s=>String(s||"").toLowerCase().replace(/̇/g,"").replace(/ə/g,"e").replace(/ı/g,"i").replace(/ö/g,"o").replace(/ü/g,"u").replace(/ş/g,"s").replace(/ç/g,"c").replace(/ğ/g,"g").replace(/ё/g,"е").replace(/[^a-z0-9а-я\s+\-*\/.()]/g," ");
+const STOP=new Set(["nedir","nece","hansi","haqqi","danis","soru","what","tell","about","does","with","from","that","this","какой","какая","расск","скажи","есть","этот","ucun","olan","olur","edir","kimi","dair","melum"]);
+const stems=s=>[...new Set(norm(s).replace(/[^a-z0-9а-я\s]/g," ").split(/\s+/).filter(w=>w.length>2).map(w=>w.slice(0,5)).filter(w=>!STOP.has(w)))];
+let AIDX=null;
+let offTopicCount=0,aiBusy=false;
+function aiIndex(){
+ if(AIDX)return AIDX;AIDX=[];
+ ALL.forEach(Q=>AIDX.push({k:"q",Q,s:new Set(stems(Q.q.join(" ")+" "+Q.o[0].join(" ")))}));
+ allCards().forEach(c=>AIDX.push({k:"c",c,s:new Set(stems(c.q.join(" ")+" "+c.a.join(" ")))}));
+ FACTS.forEach(f=>AIDX.push({k:"f",f,s:new Set(stems(f.join(" ")))}));
+ const df={};AIDX.forEach(e=>e.s.forEach(w=>df[w]=(df[w]||0)+1));AIDX.df=df;return AIDX}
+function aiSearch(msg){
+ const idx=aiIndex(),qs=stems(msg);if(!qs.length)return null;
+ let best=null,bs=0;const N=idx.length;
+ idx.forEach(e=>{let sc=0;qs.forEach(w=>{if(e.s.has(w))sc+=Math.log(N/(idx.df[w]||1))});if(sc>bs){bs=sc;best=e}});
+ return bs>=3?best:null}
+const PRE={mercury:["merk","мерк","merc"],venus:["vene","вене","venu"],mars:["mars","марс"],jupiter:["yupi","юпи","jupi"],saturn:["satu","сату"],uranus:["uran","уран"],neptune:["nept","непт"]};
+function planetOf(n){const w=n.split(/\s+/);for(const k in PRE)if(PRE[k].some(p=>w.some(x=>x.startsWith(p))))return k;return null}
+function planetCard(k){
+ const P=PL[k],L=LI(),rows=[["aiDiam","d"],["aiDay","r"],["aiYear","y"],["aiTemp","t"],["aiDist","s"],["aiGrav","g"],["aiAtm","a"],["aiMis","m"]];
+ return "<b>"+t("aiPlanetH",P.n[L])+"</b>"+rows.filter(r=>P[r[1]]!=null).map(r=>"<br>• "+t(r[0])+": <b>"+esc(tv(P,r[1])[L])+"</b>").join("")+'<br><a target="_blank" rel="noopener" href="'+esc(P.u)+'">'+t("src")+"</a>"}
+function weakStats(){
+ const H=(S.history||[]).filter(h=>h.id!=null&&ALL[h.id]),cnt={};
+ H.filter(x=>!x.ok).forEach(x=>{const tp=ALL[x.id].tp;if(tp!=null)cnt[tp]=(cnt[tp]||0)+1});
+ const top=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a]).slice(0,3);
+ return{H,cnt,top,ok:H.filter(x=>x.ok).length}}
+function aiWeak(){
+ const w=weakStats(),L=LI();if(!w.H.length)return t("aiNoHist");
+ let html="<b>"+t("aiWeakHead",w.H.length,w.ok,Math.round(w.ok*100/w.H.length))+"</b><br>";
+ html+=w.top.length?t("aiWeakList")+w.top.map(k=>"<br>• "+esc(DT[k][L])+" — "+w.cnt[k]+" ×").join(""):t("aiNoWeak");
+ if(w.top.length)html+="<br>"+t("aiTry")+'<button class="opt" data-act="review">'+t("repeat")+"</button>";
+ return html}
+function aiPlan(){
+ const L=LI(),w=weakStats(),left=allCards().filter(c=>!S.known[c.id]).length;
+ return "<b>"+t("aiPlanHead")+"</b><br>"+t("aiPlan1",left)+"<br>"+(w.top.length?t("aiPlan2",DT[w.top[0]][L]):t("aiPlan2none"))+"<br>"+t("aiPlan3")}
+function aiQuiz(){
+ const L=LI(),wrong=[...new Set((S.history||[]).filter(h=>!h.ok&&h.id!=null&&ALL[h.id]).map(h=>h.id))];
+ const pool=(wrong.length&&Math.random()<.5)?wrong.map(i=>ALL[i]):ALL,Q=pool[Math.random()*pool.length|0];
+ return "<b>"+t("aiQuizIntro")+"</b> "+esc(Q.q[L])+shuffle([0,1,2,3]).map((oi,k)=>'<button class="opt" data-qid="'+Q.id+'" data-oi="'+oi+'">'+"ABCD"[k]+") "+esc(Q.o[oi][L])+"</button>").join("")}
+function aiReply(raw){
+ const L=LI(),m=raw.trim(),n=norm(m),cm=m.replace(/[?=\s]+$/,"").trim();
+ if(cm.length<40&&/^[\d\s+\-*\/().,x×:]+$/.test(cm)&&/\d\s*[+\-*\/x×:]\s*[\d(]/.test(cm)){
+  try{const v=Function('"use strict";return ('+cm.replace(/,/g,".").replace(/[x×]/g,"*").replace(/:/g,"/")+')')();
+   if(typeof v==="number"&&isFinite(v))return "<b>"+esc(cm)+"</b><br>"+t("aiCalc",+v.toFixed(6))}catch(e){}}
+ const greeting=/^(salam|hello|hi|hey|привет|здравствуй|здравствуйте)(\\s|$)/.test(n);
+ const spaceTopic=/kosmos|planet|ay|mars|yupiter|saturn|raket|roket|nasa|astronavt|skafandr|robot|rover|iss|apollo|orion|artemis|voyager|teleskop|ulduz|galakt|kometa|meteorit|gunes|yer|space|moon|rocket|astronaut|spacesuit|satellite|star|galaxy|comet|meteor|sun|earth|космос|планет|луна|марс|ракета|космонавт|робот|телескоп/.test(n);
+ const studyTopic=/sual ver|mene sual|quiz|test|ders|dərs|lesson|study|oyren|öyrən|викторин|учеб/.test(n);
+ if(!greeting&&!spaceTopic&&!studyTopic){
+  offTopicCount++;
+  if(/necəsən|necesen|how are you|как дела/.test(n))return "Yaxşıyam, sağ ol! 🤖 Səninlə kosmosu kəşf etməyə hazıram. Bu gün hansı mövzu maraqlıdır?";
+  if(/tesekkur|təşəkkür|thanks|спасибо/.test(n))return "Dəyməz! 🌟 Başqa kosmik sualın olsa, mən buradayam.";
+  if(offTopicCount>=3){offTopicCount=0;return "📚 <b>Dərsə qayıdaq, kəşfiyyatçı!</b><br>Bir az söhbət etdik 😊 İndi kosmos missiyamıza dönək. Mars, raketlər və ya NASA robotları haqqında danışaq? İstəsən, sənə bir sual verə bilərəm."}
+  return "Maraqlı sualdır 😊 Mən bu oyunda kosmos müəllimiyəm. NASA, planetlər, raketlər və astronavtlar barədə kömək edə bilərəm.";
+ }
+ offTopicCount=0;
+ if(/kimsen|kimsən|who are you|кто ты/.test(n))return "Mən Kosmik Kəşf-in AI müəllimiyəm 🤖 Kosmosu birlikdə öyrənək! Sual verə, izah istəyə və ya mini-quiz başlada bilərsən.";
+ if(greeting)return t("aiHi");
+ if(/zeif|zeyif|sehv|weak|mistake|analiz|analy|слаб|ошиб|анализ|progress|прогресс|irelile/.test(n))return aiWeak();
+ if(/(^|\s)(plan|план)(\s|$)/.test(n))return aiPlan();
+ if(/(^|\s)(sual ver|mene sual|bir sual|quiz|test|задай|викторин|проверь|ask me)/.test(n))return aiQuiz();
+ if(/fakt|fact|факт|maraqli|interesn|bilirdin/.test(n))return t("aiFactH")+"<br>"+esc(FACTS[Math.random()*FACTS.length|0][L]);
+ const pk=planetOf(n),ov=n.split(/\s+/).filter(Boolean).length<=3||/haqqi|danis|melumat|about|tell|info|расскаж|информ|характер/.test(n);
+ if(pk&&ov)return planetCard(pk);
+ const hit=aiSearch(m);
+ if(hit){let html="🔎 "+t("aiFound")+"<br>";
+  if(hit.k==="q")html+="<b>"+esc(hit.Q.q[L])+"</b><br>✅ "+esc(hit.Q.o[0][L]);
+  else if(hit.k==="c")html+="<b>"+esc(hit.c.q[L])+"</b><br>✅ "+esc(hit.c.a[L]);
+  else html=t("aiFactH")+"<br>"+esc(hit.f[L]);
+  return html}
+ if(pk)return planetCard(pk);
+ return t("aiNone")}
+function aiSay(html,delay){
+ const log=$("aiLog"),d=document.createElement("div");d.className="msg-ai typing";d.textContent="🤖 "+t("aiTyping");log.appendChild(d);log.scrollTop=log.scrollHeight;
+ setTimeout(()=>{d.className="msg-ai";d.innerHTML=html;log.scrollTop=log.scrollHeight},delay==null?420:delay)}
+function aiSend(txt){
+ txt=String(txt||"").trim();if(!txt||aiBusy)return;
+ const log=$("aiLog"),d=document.createElement("div");d.className="msg-me";d.textContent=txt.slice(0,500);log.appendChild(d);
+ aiBusy=true;$("aiSendBtn").disabled=true;
+ let r;try{r=aiReply(txt.slice(0,500))}catch(e){r=t("aiNone")}
+ const delay=360;
+ const before=log.children.length;
+ aiSay(r,delay);
+ setTimeout(()=>{aiBusy=false;$("aiSendBtn").disabled=false;$("aiIn").focus();},delay+40);
+ log.scrollTop=log.scrollHeight;
+}
+function aiChips(){$("aiChips").innerHTML=["chipWeak","chipQuiz","chipFact","chipPlan","chipMars"].map(k=>'<button class="ghost" data-c="'+k+'">'+t(k)+"</button>").join("")}
+$("aiChips").onclick=e=>{const b=e.target.closest("button");if(b)aiSend(t(b.dataset.c))};
+$("aiForm").addEventListener("submit",e=>{e.preventDefault();const input=$("aiIn"),v=input.value.trim();if(!v){input.focus();return}input.value="";aiSend(v)});
+$("aiIn").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();$("aiForm").requestSubmit()}});
+$("aiLog").onclick=e=>{
+ const b=e.target.closest("button");if(!b)return;
+ if(b.dataset.act==="review"){startMistakeReview();return}
+ if(b.dataset.qid!=null){
+  const Q=ALL[+b.dataset.qid],oi=+b.dataset.oi,ok=oi===0;
+  b.parentNode.querySelectorAll("button.opt").forEach(x=>{x.disabled=true;if(x.dataset.oi==="0")x.classList.add("ok")});
+  if(!ok)b.classList.add("bad");
+  logAnswer(Q,oi,ok);if(ok){S.xp+=3;save();inv()}
+  aiSay((ok?t("aiRight")+" +3 xp":t("aiWrong")+" <b>"+esc(Q.o[0][LI()])+"</b>")+"<br>"+t("aiMore"),300)}};
+function openAI(){
+ BACKTO=$("titleScreen").hidden?"map":"titleScreen";view("ai");aiChips();
+ if(!$("aiLog").children.length)aiSay(t("aiHi"),150);
+ setTimeout(()=>{try{$("aiIn").focus({preventScroll:true})}catch(e){}},50)}
+
+
+/* ---------- NASA obyekt kataloqu ---------- */
+const CATALOG=[
+ {cat:"robot",e:"🤖",n:"Mars roverləri",d:"Sojourner, Spirit, Opportunity, Curiosity və Perseverance kimi robotlar Marsın səthini, süxurlarını və keçmiş yaşayış şəraitini araşdırır.",url:"https://science.nasa.gov/mars/",q:"NASA Mars rovers"},
+ {cat:"robot",e:"🚁",n:"Ingenuity helikopteri",d:"Marsda uçuş nümayişi aparan kiçik texnoloji helikopter. Mars atmosferində idarə olunan uçuşun mümkünlüyünü göstərdi.",url:"https://science.nasa.gov/mission/mars-2020-perseverance/",q:"NASA Ingenuity helicopter"},
+ {cat:"rocket",e:"🚀",n:"Saturn V",d:"Apollo Ay missiyalarında istifadə edilən nəhəng daşıyıcı raket. İnsanları Aya aparan missiyaların əsas daşıyıcısı idi.",url:"https://www.nasa.gov/history/afj/",q:"NASA Saturn V"},
+ {cat:"rocket",e:"🚀",n:"Space Launch System (SLS)",d:"NASA-nın Artemis proqramı üçün hazırladığı ağır daşıyıcı raket. Orion kosmik gəmisini Ay istiqamətində göndərmək üçün nəzərdə tutulub.",url:"https://www.nasa.gov/exploration/systems/sls/",q:"NASA SLS rocket"},
+ {cat:"ship",e:"🛸",n:"Orion kosmik gəmisi",d:"Astronavtları Ay ətrafına və gələcəkdə daha uzaq kosmik missiyalara daşımaq üçün nəzərdə tutulmuş ekipaj kapsulu.",url:"https://www.nasa.gov/exploration/systems/orion/",q:"NASA Orion spacecraft"},
+ {cat:"ship",e:"🛰️",n:"Voyager 1 və 2",d:"1977-ci ildə buraxılan robot zondlar. Xarici planetləri araşdırdılar və ulduzlararası fəzaya doğru səyahətlərini davam etdirirlər.",url:"https://science.nasa.gov/mission/voyager/",q:"NASA Voyager spacecraft"},
+ {cat:"suit",e:"👨‍🚀",n:"Apollo A7L skafandrı",d:"Apollo astronavtlarının Ay səthində geyindiyi təzyiqli skafandr. Həyat dəstəyi, istilik nəzarəti və mikrometeoritlərdən qorunma təmin edirdi.",url:"https://www.nasa.gov/humans-in-space/spacesuits/",q:"NASA Apollo spacesuit"},
+ {cat:"suit",e:"🧑‍🚀",n:"xEMU / yeni nəsil skafandr",d:"NASA-nın Ay səthində işləmək üçün inkişaf etdirdiyi yeni nəsil skafandr texnologiyaları. Hərəkətlilik və təhlükəsizlik əsas məqsədlərdəndir.",url:"https://www.nasa.gov/humans-in-space/spacesuits/",q:"NASA next generation spacesuit"},
+ {cat:"station",e:"🏗️",n:"Beynəlxalq Kosmik Stansiya",d:"Bir neçə kosmik agentliyin birgə istifadə etdiyi orbit laboratoriyası. Astronavtlar burada mikroqravitasiyada elmi təcrübələr aparırlar.",url:"https://www.nasa.gov/international-space-station/",q:"NASA International Space Station"},
+ {cat:"parts",e:"🧩",n:"Canadarm2 robot qolu",d:"ISS-də yükləri və avadanlıqları hərəkət etdirmək, kosmik gəmilərə kömək etmək və stansiyanın texniki xidmətində istifadə olunur.",url:"https://www.asc-csa.gc.ca/eng/iss/canadarm2/",q:"Canadarm2 NASA"},
+ {cat:"parts",e:"📡",n:"Deep Space Network antenaları",d:"Yer üzündə yerləşən böyük radioantenalar uzaq kosmik zondlarla əlaqə saxlamağa və onlardan məlumat almağa kömək edir.",url:"https://www.nasa.gov/communicating-with-missions/dsn/",q:"NASA Deep Space Network antennas"},
+ {cat:"telescope",e:"🔭",n:"James Webb teleskopu",d:"İnfraqırmızı müşahidələr aparan kosmik teleskop. İlk qalaktikaları, ulduzların yaranmasını və ekzoplanet atmosferlərini öyrənir.",url:"https://science.nasa.gov/mission/webb/",q:"NASA James Webb Space Telescope"}
+];
+const CATN=[["all","Hamısı"],["robot","Robotlar"],["rocket","Raketlər"],["ship","Kosmik gəmilər"],["suit","Skafandrlar"],["station","Stansiyalar"],["parts","Ehtiyat hissələri"],["telescope","Teleskoplar"]];
+function renderCatalog(cat="all"){
+ $("catalogCats").innerHTML=CATN.map(([id,n])=>'<button class="mp '+(id===cat?'on':'')+'" data-cat="'+id+'">'+n+'</button>').join("");
+ $("catalogGrid").innerHTML=CATALOG.filter(x=>cat==="all"||x.cat===cat).map(x=>'<article class="catalog-card"><div class="catalog-emoji">'+x.e+'</div><h3>'+x.n+'</h3><p>'+x.d+'</p><a target="_blank" rel="noopener" href="https://images.nasa.gov/search?q='+encodeURIComponent(x.q)+'">Şəkillər ↗</a><a target="_blank" rel="noopener" href="https://nasa3d.arc.nasa.gov/search?q='+encodeURIComponent(x.n)+'">3D modellər ↗</a><a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query='+encodeURIComponent(x.q+' NASA')+'">Videolar ↗</a><a target="_blank" rel="noopener" href="'+x.url.replace("https://science.nasa.gov/mars/","https://science.nasa.gov/mars/")+'">Ətraflı məlumat ↗</a></article>').join("");
+}
+$("openCatalog").onclick=()=>{BACKTO=$("titleScreen").hidden?"map":"titleScreen";view("catalog");renderCatalog()};
+$("catalogBack").onclick=()=>view(BACKTO);
+$("catalogCats").onclick=e=>{const b=e.target.closest("[data-cat]");if(b)renderCatalog(b.dataset.cat)};
+
+/* ---------- Idarəetmə ---------- */
+$("go").onclick=()=>next();
+$("playGame").onclick=()=>{me.x=72;me.y=350;ln=-2;view("map");toast(t("welcome"))};$("scanBtn").onclick=()=>{scanUntil=performance.now()+12000;toast(t("scanOn"))};$("bL").onclick=lamp;$("bF").onclick=fifty;$("near").onclick=enter;
+$("back").onclick=()=>{clearTimeout(timer);view("map")};
+$("buyL").onclick=()=>{if(S.coins>=8){S.coins-=8;S.lamps++;save();inv()}};
+$("buyF").onclick=()=>{if(S.coins>=5){S.coins-=5;S.fifty++;save();inv()}};
+let arm=0;
+$("playNASA").onclick=()=>openCards();$("openAI").onclick=()=>openAI();$("heroLearn").onclick=()=>openCards();$("heroAI").onclick=()=>openAI();
+$("repeatMistakes").onclick=startMistakeReview;
+$("clearHistory").onclick=()=>{S.history=[];save();drawHistory();toast(t("cleared"))};
+$("reset").onclick=function(){
+ if(!arm){arm=1;this.textContent=t("rstSure");setTimeout(()=>{arm=0;this.textContent=t("rst")},3000)}
+ else{const keepC=S.custom;S=fresh();S.custom=keepC||[];gameStarted=false;setMap("moon");me.x=72;me.y=350;save();arm=0;this.textContent=t("rst");me.x=72;me.y=350;ln=-2;inv();drawAch();view("titleScreen")}};
+const AR={arrowup:"w",arrowdown:"s",arrowleft:"a",arrowright:"d",pageup:"w",pagedown:"s",home:"a",end:"d"};
+const nk=e=>AR[e.key.toLowerCase()]||e.key.toLowerCase();
+addEventListener("keydown",e=>{
+ const k=nk(e);
+ if(!$("map").hidden){
+  if(AR[e.key.toLowerCase()]){keys[AR[e.key.toLowerCase()]]=1;e.preventDefault()}
+  else if((k==="e"||k==="enter"||k===" ")&&near>=0){e.preventDefault();enter()}}
+ else if(!$("quiz").hidden&&!locked&&!e.repeat){
+  const x=Math.max("abcd".indexOf(k),"1234".indexOf(k));
+  if(k.length===1&&x>-1){const b=document.querySelectorAll(".ans")[x];if(b)b.click()}
+  else if(k==="l")lamp();else if(k==="f")fifty()}});
+addEventListener("keyup",e=>{keys[nk(e)]=0;if(e.key==="Shift")keys.shift=0});
+addEventListener("blur",()=>{for(const k in keys)keys[k]=0});
+document.querySelectorAll("[data-k]").forEach(b=>{
+ const k=b.dataset.k;b.onpointerdown=e=>{e.preventDefault();keys[k]=1};
+ ["pointerup","pointerleave","pointercancel"].forEach(ev=>b["on"+ev]=()=>{keys[k]=0})});
+me.x=72;me.y=350;
+spawn();setLang(LANG);view("titleScreen");
+</script></body></html>
